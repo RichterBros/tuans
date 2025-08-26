@@ -1,0 +1,291 @@
+/* stylelint-disable-next-line at-rule-no-unknown */
+@tailwind base;
+/* stylelint-disable-next-line at-rule-no-unknown */
+@tailwind components;
+/* stylelint-disable-next-line at-rule-no-unknown */
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+/* Material Symbols setup */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+@keyframes fadeInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInFromTop 0.8s ease-out forwards;
+}
+
+.slide-up-from-below {
+  animation: slideUpFromBelow 0.7s cubic-bezier(0, 0, 0.2, 1) forwards;
+  will-change: transform;
+}
+
+@keyframes slideUpFromBelow {
+  from {
+    transform: translateY(25px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.fade-in-trigger {
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-trigger.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-trigger.delay-500 {
+  transition-delay: 0.5s;
+}
+
+.fade-in-trigger.delay-1000 {
+  transition-delay: 1s;
+}
+
+.fade-in-from-right {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-from-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in-from-left {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-from-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Custom navigation shadow */
+.nav-shadow {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+}
+
+/* Light sweep effect for logo */
+.logo-container {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-img {
+  display: block;
+  width: 425px;
+}
+
+/* Masked overlay contains sparkle + sheen */
+.masked-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+
+  mask-image: url('/logo.png');
+  mask-size: cover;
+  mask-repeat: no-repeat;
+  -webkit-mask-image: url('/logo.png');
+  -webkit-mask-size: cover;
+  -webkit-mask-repeat: no-repeat;
+}
+
+
+
+/* Sheen movement */
+.sheen {
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  background-size: 100% 100%;
+  transition: left 0.6s ease-in-out;
+}
+
+/* Hero image subtle zoom-in on load */
+@keyframes heroZoomIn {
+  from {
+    transform: scale(1.2);
+  }
+  to {
+    transform: scale(1.5);
+  }
+}
+
+.hero-zoom-in {
+  animation: heroZoomIn 1.2s ease-out forwards;
+  transform-origin: center;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-zoom-in {
+    animation: none;
+  }
+}
+
+/* Hero text starts larger and settles to normal size */
+@keyframes heroTextScaleDown {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.hero-text-scale-down {
+  animation: heroTextScaleDown 0.9s ease-out forwards;
+  transform-origin: center;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-text-scale-down {
+    animation: none;
+  }
+}
+
+/* Hero text starts smaller and scales up to normal size */
+@keyframes heroTextScaleUp {
+  from {
+    transform: scale(0.94);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.hero-text-scale-up {
+  animation: heroTextScaleUp 0.9s ease-out forwards;
+  transform-origin: center;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-text-scale-up {
+    animation: none;
+  }
+}
+
+/* Homepage hero heading: slide in slightly from the right */
+@keyframes heroHeadingSlideInRight {
+  from {
+    transform: translateX(32px) scale(1.06);
+  }
+  to {
+    transform: translateX(0) scale(1);
+  }
+}
+
+.hero-heading-slide-in-right {
+  animation: heroHeadingSlideInRight 0.8s ease-out forwards;
+  will-change: transform;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-heading-slide-in-right {
+    animation: none;
+  }
+}
+
+/* About hero image: subtle 2D tilt on load */
+@keyframes heroTiltXOnLoad {
+  0% {
+    transform: rotate(0.5deg);
+  }
+  40% {
+    transform: rotate(-0.5deg);
+  }
+  70% {
+    transform: rotate(0.2deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Teal glow for homepage images (darker, 10px blur, no spread) */
+.glow-magenta {
+  box-shadow: 0 0 10px 0 rgba(45, 100, 120, 0.9) !important;
+}
+
+.hero-tilt-x-onload {
+  animation: heroTiltXOnLoad 1.4s ease-out forwards;
+  transform-origin: center;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-tilt-x-onload {
+    animation: none;
+  }
+}
