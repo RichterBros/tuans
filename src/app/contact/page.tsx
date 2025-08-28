@@ -291,7 +291,7 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting || (isRecaptchaEnabled && !recaptchaLoaded)}
-                    className={`font-bold py-3 px-8 rounded-lg transition-colors ${
+                    className={`font-bold py-3 px-8 transition-colors btn-angled ${
                       isSubmitting || !recaptchaLoaded ? 'opacity-50 cursor-not-allowed' : ''
                     }`}
                     style={{ 

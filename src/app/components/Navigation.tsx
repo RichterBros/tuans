@@ -83,7 +83,7 @@ export default function Navigation() {
               <div className="flex flex-col items-center gap-2">
                 {/* Main logo */}
                 <div className="relative flex items-center justify-center">
-                  <a href="/" className="logo-container z-10" ref={logoContainerRef}>
+                  <a href="/" className="logo-container z-10 logo-scale-125" ref={logoContainerRef}>
                     <img src="/tuan-logo-textv2 copy.png" alt="Tuans Auto Service" className="logo-img" />
                     <div className="masked-overlay">
                       <div className="sheen" ref={sheenRef}></div>

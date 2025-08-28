@@ -86,11 +86,18 @@ body {
 }
 
 .fade-in-trigger.delay-500 {
-  transition-delay: 0.5s;
+  transition-delay: 0.25s;
 }
 
 .fade-in-trigger.delay-1000 {
-  transition-delay: 1s;
+  transition-delay: 0.5s;
+}
+
+/* Ensure hover interactions respond immediately (no delay) */
+.fade-in-trigger.visible:hover,
+.fade-in-from-right.visible:hover,
+.fade-in-from-left.visible:hover {
+  transition-delay: 0s !important;
 }
 
 .fade-in-from-right {
@@ -140,7 +147,13 @@ body {
 
 .logo-img {
   display: block;
-  width: 515px;
+  width: 592px;
+}
+
+/* Optional scale modifier for the logo container */
+.logo-scale-125 {
+  transform: scale(1.25);
+  transform-origin: center;
 }
 
 /* Masked overlay contains sparkle + sheen */
@@ -353,4 +366,96 @@ body {
     linear-gradient(90deg, rgba(255, 0, 0, 0.18) 1px, transparent 1px);
   background-size: 24px 24px, 24px 24px;
   background-position: 0 0, 0 0;
+}
+
+/* Angled card corners: 45deg on top-left and bottom-right, 90deg on others */
+.card-angled {
+  --notch-size: 28px;
+  clip-path: polygon(
+    var(--notch-size) 0,
+    100% 0,
+    100% calc(100% - var(--notch-size)),
+    calc(100% - var(--notch-size)) 100%,
+    0 100%,
+    0 var(--notch-size)
+  );
+}
+
+@media (min-width: 768px) {
+  .card-angled {
+    --notch-size: 44px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .card-angled {
+    --notch-size: 56px;
+  }
+}
+
+/* Variant: only bottom-right corner notched; others square */
+.card-angled-br {
+  --notch-size: 28px;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--notch-size)),
+    calc(100% - var(--notch-size)) 100%,
+    0 100%,
+    0 0
+  );
+}
+
+@media (min-width: 768px) {
+  .card-angled-br {
+    --notch-size: 44px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .card-angled-br {
+    --notch-size: 56px;
+  }
+}
+
+/* Button variant: notches at upper-left and lower-right; smaller notch size */
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+a[role="button"],
+.btn-angled {
+  --btn-notch: 8px;
+  clip-path: polygon(
+    var(--btn-notch) 0,
+    100% 0,
+    100% calc(100% - var(--btn-notch)),
+    calc(100% - var(--btn-notch)) 100%,
+    0 100%,
+    0 var(--btn-notch)
+  );
+}
+
+@media (min-width: 768px) {
+  button,
+  [type="button"],
+  [type="submit"],
+  [type="reset"],
+  a[role="button"],
+  .btn-angled { --btn-notch: 10px; }
+}
+
+@media (min-width: 1280px) {
+  button,
+  [type="button"],
+  [type="submit"],
+  [type="reset"],
+  a[role="button"],
+  .btn-angled { --btn-notch: 12px; }
+}
+
+/* Outline that follows AngleCut shapes (works with clip-path using drop-shadow) */
+.angled-outline {
+  /* 1px outline that follows clip-path; uses box-shadow spread */
+  box-shadow: 0 0 0 1px rgba(209, 213, 219, 1);
 }

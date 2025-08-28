@@ -146,7 +146,7 @@ export default function About() {
                 </div>
                 
                 {/* Call to Action */}
-                <div className="mt-auto p-4 bg-gray-100 rounded-lg">
+                <div className="mt-auto p-4 bg-gray-100 card-angled overflow-hidden">
                   <p className="text-lg font-bold text-gray-800 text-center">
                     FULL SERVICE AUTO REPAIR AND MAINTENANCE
                   </p>
@@ -171,21 +171,21 @@ export default function About() {
                 </div>
                 
                 {/* Shop Exterior Image - trigger */}
-                <div className="w-full h-[306px] rounded-lg overflow-hidden mb-0 fade-in-from-right mt-auto" id="image-trigger">
+                <div className="w-full h-[306px] card-angled overflow-hidden mb-0 fade-in-from-right mt-auto" id="image-trigger">
                   <img src="/shop-exterior-red-car.jpg" alt="Shop Exterior with Red Sports Car" className="w-full h-full object-cover" style={{ objectPosition: 'center 60%' }} />
                 </div>
                 
                 {/* Team Image - Shown on mobile, hidden on desktop */}
-                <div className="block lg:hidden w-full h-64 rounded-lg overflow-hidden fade-in-from-left" id="team-image-mobile">
+                <div className="block lg:hidden w-full h-64 card-angled overflow-hidden fade-in-from-left" id="team-image-mobile">
                   <img src="/team_straight_on_front.jpg" alt="Team Photo" className="w-full h-full object-cover" />
                 </div>
               </div>
 
               {/* Bottom Row - Aligned Grey Boxes */}
-              <div className="hidden lg:block w-full h-64 rounded-lg overflow-hidden fade-in-from-left lg:col-start-1 lg:row-start-2 mb-0" id="team-image-desktop">
+              <div className="hidden lg:block w-full h-64 card-angled overflow-hidden fade-in-from-left lg:col-start-1 lg:row-start-2 mb-0" id="team-image-desktop">
                 <img src="/team_straight_on_front.jpg" alt="Team Photo" className="w-full h-full object-cover" />
               </div>
-              <div className="w-full h-64 rounded-lg overflow-hidden fade-in-from-right lg:col-start-2 lg:row-start-2 mb-0" id="garage-image">
+              <div className="w-full h-64 card-angled overflow-hidden fade-in-from-right lg:col-start-2 lg:row-start-2 mb-0" id="garage-image">
                 <img src="/Garage_Interior.jpg" alt="Garage Interior" className="w-full h-full object-cover" />
               </div>
             </div>

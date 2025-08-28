@@ -111,7 +111,7 @@ export default function ServicesPage() {
             {/* Three Column Services */}
             <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {/* Column 1 - Left */}
-              <div className="rounded-lg p-8 shadow-md border border-gray-200" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
+              <div className="p-8 card-angled overflow-hidden" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
                 <h3 className="text-xl font-bold text-gray-800 mb-6">Basic Services</h3>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start">
@@ -158,7 +158,7 @@ export default function ServicesPage() {
               </div>
 
               {/* Column 2 - Middle */}
-              <div className="rounded-lg p-8 shadow-md border border-gray-200" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
+              <div className="p-8 card-angled overflow-hidden" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
                 <h3 className="text-xl font-bold text-gray-800 mb-6">Advanced Services</h3>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start">
@@ -205,7 +205,7 @@ export default function ServicesPage() {
               </div>
 
               {/* Column 3 - Right */}
-              <div className="rounded-lg p-8 shadow-md border border-gray-200" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
+              <div className="p-8 card-angled overflow-hidden" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
                 <h3 className="text-xl font-bold text-gray-800 mb-6">Additional Services</h3>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start">

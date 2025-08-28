@@ -151,7 +151,7 @@ export default function ReviewsPage() {
         <div className="max-w-6xl mx-auto px-4 py-16">
           <div className="space-y-8">
             {/* First full-width review */}
-            <div className="rounded-lg p-8 shadow-md border border-gray-200" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
+            <div className="p-8 card-angled overflow-hidden" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
               <div className="text-center mb-6">
                 <div className="text-6xl text-gray-300 mb-4">"</div>
                 <div className="flex justify-center mb-4">
@@ -172,7 +172,7 @@ export default function ReviewsPage() {
             {/* Three-column section */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {reviews.slice(1, 4).map((review) => (
-                <div key={review.id} className="rounded-lg p-6 shadow-md border border-gray-200" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
+                <div key={review.id} className="p-6 card-angled overflow-hidden" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
                   <div className="text-center mb-4">
                     <div className="text-4xl text-gray-300 mb-3">"</div>
                     <div className="flex justify-center mb-3">
@@ -200,7 +200,7 @@ export default function ReviewsPage() {
             </div>
 
                         {/* Second full-width review */}
-            <div className="rounded-lg p-8 shadow-md border border-gray-200" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
+            <div className="p-8 card-angled overflow-hidden" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
               <div className="text-center mb-6">
                 <div className="text-6xl text-gray-300 mb-4">"</div>
                 <div className="flex justify-center mb-4">
@@ -226,7 +226,7 @@ export default function ReviewsPage() {
             {/* Second three-column section */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {reviews.slice(5, 8).map((review) => (
-                <div key={review.id} className="rounded-lg p-6 shadow-md border border-gray-200" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
+                <div key={review.id} className="p-6 card-angled overflow-hidden" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
                   <div className="text-center mb-4">
                     <div className="text-4xl text-gray-300 mb-3">"</div>
                     <div className="flex justify-center mb-3">
@@ -267,7 +267,7 @@ export default function ReviewsPage() {
                 href="https://www.google.com/search?sca_esv=3d1e29cf7e253e0e&sxsrf=AE3TifMMmY80KX27jVgtwDGfiFEMvzp2yw:1754071508853&si=AMgyJEuzsz2NflaaWzrzdpjxXXRaJ2hfdMsbe_mSWso6src8s3laaL6cGY1EdG5rUpkMGEZ8u0zWPAg9F2ar_BxMO_noKfIlSWVp1y5iuVX_-qvEu4p5CfmDig_MZU9ut0_8XMaImOHJzrlugImdnJEcPONewS7Lww%3D%3D&q=Tuans+Auto+Services+Reviews&sa=X&ved=2ahUKEwj_osjJmeqOAxVCGBAIHYSmIMoQ0bkNegQINRAD&cshid=1754071582339652&biw=2048&bih=991&dpr=1.25"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold py-3 px-8 rounded-lg transition-colors inline-flex items-center gap-2"
+                className="font-bold py-3 px-8 transition-colors inline-flex items-center gap-2 btn-angled"
                 style={{ 
                   backgroundColor: 'rgb(74, 162, 192)',
                   color: 'rgb(30, 46, 67)'
@@ -301,7 +301,7 @@ export default function ReviewsPage() {
              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                <a 
                  href="/contact" 
-                 className="font-bold py-3 px-8 rounded-lg transition-colors"
+                 className="font-bold py-3 px-8 transition-colors btn-angled"
                  style={{ 
                    backgroundColor: 'rgb(74, 162, 192)',
                    color: 'rgb(30, 46, 67)'
@@ -317,7 +317,7 @@ export default function ReviewsPage() {
                </a>
                <a 
                  href="/services" 
-                 className="font-bold py-3 px-8 rounded-lg transition-colors"
+                 className="font-bold py-3 px-8 transition-colors btn-angled"
                  style={{ 
                    backgroundColor: 'rgb(74, 162, 192)',
                    color: 'rgb(30, 46, 67)'

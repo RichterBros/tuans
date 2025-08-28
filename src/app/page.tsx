@@ -82,7 +82,7 @@ export default function Home() {
       const fadeElements = document.querySelectorAll('.fade-in-trigger, .fade-in-from-right, .fade-in-from-bottom')
       fadeElements.forEach((element) => {
         const rect = element.getBoundingClientRect()
-        const isVisible = rect.top < window.innerHeight * 0.5
+        const isVisible = rect.top < window.innerHeight * 0.9
         if (isVisible) {
           element.classList.add('visible')
         }
@@ -176,6 +176,7 @@ export default function Home() {
           playsInline
           loop
           className="w-full h-full object-cover"
+          style={{ WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 160px)', maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 160px)' }}
           onError={(e) => {
             console.log('Video failed to load:', e);
           }}
@@ -185,6 +186,8 @@ export default function Home() {
       </div>
       {/* Global dark gradient overlay over video */}
       <div className="fixed inset-0 pointer-events-none" style={{ zIndex: -1, background: 'linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.25))' }} />
+      {/* Global top fade to soften the video's top edge on scroll */}
+      <div className="fixed left-0 right-0 top-0 h-28 pointer-events-none" style={{ zIndex: -1, background: 'linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0))' }} />
       {/* Global black overlay fade on first load (matches hero) */}
       <div className={`fixed inset-0 pointer-events-none transition-opacity duration-1000 ${overlayFadeOut ? 'opacity-0' : 'opacity-100'}`} style={{ zIndex: -1, backgroundColor: 'black' }} />
       {/* Hero Section with Video Background */}
@@ -201,7 +204,7 @@ export default function Home() {
             
             <a
               href="/contact"
-              className="inline-block font-bold py-3 px-6 rounded shadow-lg text-lg transition-colors duration-200 mt-2"
+              className="inline-block font-bold py-3 px-6 shadow-lg text-lg transition-colors duration-200 mt-2 btn-angled"
               style={{ 
                 backgroundColor: 'rgb(74, 162, 192)',
                 color: 'rgb(30, 46, 67)'
@@ -231,7 +234,7 @@ export default function Home() {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'radial-gradient(circle at 50% 28%, rgba(131,136,132,0) 0%, rgba(131,136,132,0) 30%, rgba(131,136,132,0.18) 55%, rgba(131,136,132,0.45) 78%, rgba(131,136,132,0.75) 100%)'
+              'radial-gradient(circle at 50% 28%, rgba(131,136,132,0) 0%, rgba(131,136,132,0) 30%, rgba(131,136,132,0.18) 55%, rgba(188, 188, 188, 0.45) 78%, rgba(234, 234, 234, 0.85) 100%, rgb(231, 231, 231) 100%)'
           }}
         />
         <div className="relative z-10 container mx-auto px-4">
@@ -243,16 +246,16 @@ export default function Home() {
       {/* Three Column Info Section */}
       <section className="py-16" style={{ background: 'linear-gradient(to right, rgb(63, 139, 165), rgb(74, 162, 192), rgb(63, 139, 165))' }}>
         <div className="container mx-auto px-4">
-          <div ref={topCardRef} className="rounded-2xl shadow-lg p-6 md:p-10">
+          <div ref={topCardRef} className="shadow-lg p-6 md:p-10">
             <div className="grid md:grid-cols-3 gap-8">
             {/* Left Section - Repair and Maintenance */}
             <div className="text-center">
-              <div className="mb-6">
+              <div className="mb-6 card-angled overflow-hidden fade-in-trigger">
                 {/* Toyota Land Cruiser image */}
                 <img 
                   src="/toyota-land-cruiser.png" 
                   alt="Toyota Land Cruiser - Repair and Maintenance" 
-                  className="w-full h-48 object-cover rounded-lg mb-4 fade-in-trigger cursor-pointer hover:opacity-90 transition-opacity glow-magenta"
+                  className="block w-full h-48 object-cover cursor-pointer hover:opacity-50 transition-opacity glow-magenta"
                   onClick={() => setSelectedImage("/toyota-land-cruiser.png")}
                 />
               </div>
@@ -264,12 +267,12 @@ export default function Home() {
 
             {/* Middle Section - Family Owned and Operated */}
             <div className="text-center">
-              <div className="mb-6">
+              <div className="mb-6 card-angled overflow-hidden fade-in-trigger delay-500">
                 {/* Team image */}
                 <img 
                   src="/team-placeholder copy.png" 
                   alt="Tuans Auto Service Team" 
-                  className="w-full h-48 object-cover rounded-lg mb-4 fade-in-trigger delay-500 cursor-pointer hover:opacity-90 transition-opacity glow-magenta"
+                  className="block w-full h-48 object-cover cursor-pointer hover:opacity-50 transition-opacity glow-magenta"
                   onClick={() => setSelectedImage("/team-placeholder copy.png")}
                 />
               </div>
@@ -281,12 +284,12 @@ export default function Home() {
 
             {/* Right Section - Business Hours */}
             <div className="text-center">
-              <div className="mb-6">
+              <div className="mb-6 card-angled overflow-hidden fade-in-trigger delay-1000">
                 {/* Shop image */}
                 <img 
                   src="/tuans-shop.png" 
                   alt="Tuans Auto Service Shop" 
-                  className="w-full h-48 object-cover rounded-lg mb-4 fade-in-trigger delay-1000 cursor-pointer hover:opacity-90 transition-opacity glow-magenta"
+                  className="block w-full h-48 object-cover cursor-pointer hover:opacity-50  transition-opacity glow-magenta"
                   onClick={() => setSelectedImage("/tuans-shop.png")}
                 />
               </div>
@@ -305,7 +308,7 @@ export default function Home() {
       {/* Dark Header Section */}
       <section className="pt-4 pb-8 -mt-10" style={{ background: 'linear-gradient(to right, rgb(63, 139, 165), rgb(74, 162, 192), rgb(63, 139, 165))' }}>
         <div className="container mx-auto px-4">
-          <div ref={bottomCardRef} className="relative rounded-2xl shadow-lg p-6 md:p-10 overflow-hidden">
+          <div ref={bottomCardRef} className="relative shadow-lg p-6 md:p-10 overflow-hidden card-angled-br">
             {/* Background image fills card */}
             <div className="absolute inset-0">
               <div
@@ -355,7 +358,7 @@ export default function Home() {
             {/* More Reviews Button */}
             <a 
               href="/reviews" 
-              className="inline-block font-bold py-3 px-8 rounded-lg transition-colors duration-200"
+              className="inline-block font-bold py-3 px-8 transition-colors duration-200 btn-angled"
               style={{ 
                 backgroundColor: 'rgb(74, 162, 192)',
                 color: 'rgb(30, 46, 67)'
