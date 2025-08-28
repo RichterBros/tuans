@@ -151,7 +151,7 @@ export default function ReviewsPage() {
         <div className="max-w-6xl mx-auto px-4 py-16">
           <div className="space-y-8">
             {/* First full-width review */}
-            <div className="bg-gray-50 rounded-lg p-8 shadow-md border border-gray-200">
+            <div className="rounded-lg p-8 shadow-md border border-gray-200" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
               <div className="text-center mb-6">
                 <div className="text-6xl text-gray-300 mb-4">"</div>
                 <div className="flex justify-center mb-4">
@@ -172,7 +172,7 @@ export default function ReviewsPage() {
             {/* Three-column section */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {reviews.slice(1, 4).map((review) => (
-                <div key={review.id} className="bg-gray-50 rounded-lg p-6 shadow-md border border-gray-200">
+                <div key={review.id} className="rounded-lg p-6 shadow-md border border-gray-200" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
                   <div className="text-center mb-4">
                     <div className="text-4xl text-gray-300 mb-3">"</div>
                     <div className="flex justify-center mb-3">
@@ -200,7 +200,7 @@ export default function ReviewsPage() {
             </div>
 
                         {/* Second full-width review */}
-            <div className="bg-gray-50 rounded-lg p-8 shadow-md border border-gray-200">
+            <div className="rounded-lg p-8 shadow-md border border-gray-200" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
               <div className="text-center mb-6">
                 <div className="text-6xl text-gray-300 mb-4">"</div>
                 <div className="flex justify-center mb-4">
@@ -226,7 +226,7 @@ export default function ReviewsPage() {
             {/* Second three-column section */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {reviews.slice(5, 8).map((review) => (
-                <div key={review.id} className="bg-gray-50 rounded-lg p-6 shadow-md border border-gray-200">
+                <div key={review.id} className="rounded-lg p-6 shadow-md border border-gray-200" style={{ background: 'linear-gradient(to top, rgba(255,222,0,0.2), #ffffff)' }}>
                   <div className="text-center mb-4">
                     <div className="text-4xl text-gray-300 mb-3">"</div>
                     <div className="flex justify-center mb-3">

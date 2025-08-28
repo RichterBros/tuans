@@ -13,10 +13,13 @@ const navLinks: NavLink[] = [
   { name: 'BLOG', href: '/blog' },
 ]
 
+const BASE_LOGO_WIDTH = 425
+
 export default function Navigation() {
   const pathname = usePathname()
   const logoContainerRef = useRef<HTMLAnchorElement>(null)
   const sheenRef = useRef<HTMLDivElement>(null)
+  
 
   useEffect(() => {
     const wrapper = logoContainerRef.current
@@ -43,12 +46,14 @@ export default function Navigation() {
     }
   }, [])
 
+  
+
   return (
     <nav className="w-full bg-gradient-to-t from-red-900 via-red-900 to-black text-white py-4 px-2 flex flex-col items-center z-50" style={{ background: 'linear-gradient(to top, rgb(131, 136, 132) 0%, rgb(200, 205, 202) 35%, rgb(235, 237, 236) 100%)' }}>
       {/* Logo and Text Section */}
-      <div className="flex items-center justify-center w-full max-w-6xl mx-auto gap-8 mb-4 md:mb-0">
+      <div className="relative flex items-center justify-center w-full max-w-6xl mx-auto gap-8 mb-4 md:mb-0 px-4 md:px-6">
                                                                        {/* Left Navigation Links - Hidden on mobile */}
-           <div className="hidden md:flex gap-6">
+           <div className="relative z-10 hidden md:flex gap-6 lg:-translate-x-5">
              {navLinks.slice(0, 3).map((link) => (
                <a
                  key={link.name}
@@ -74,22 +79,23 @@ export default function Navigation() {
            </div>
 
                     {/* Center Logo and Text */}
-            <div className="flex flex-col items-center">
+            <div className="relative z-10 flex flex-col items-center">
               <div className="flex flex-col items-center gap-2">
-                                 <a href="/" className="logo-container" ref={logoContainerRef}>
-                   <img src="/logo.png" alt="Tuans Auto Service Logo" width="425" height="425" className="logo-img"  />
-                   <div className="masked-overlay">
-                     <div className="sheen" ref={sheenRef}></div>
-                   </div>
-                 </a>
-                                 <a href="/" className="cursor-pointer">
-                                   <img src="/tuan-logo-text.png" alt="Tuans Auto Service" className="max-h-8 sm:max-h-10 md:max-h-12 lg:max-h-16 xl:max-h-20 w-auto object-contain" style={{ filter: 'drop-shadow(4px 4px 0px rgba(74, 162, 192, 1))' }} />
-                                 </a>
+                {/* Main logo */}
+                <div className="relative flex items-center justify-center">
+                  <a href="/" className="logo-container z-10" ref={logoContainerRef}>
+                    <img src="/tuan-logo-textv2 copy.png" alt="Tuans Auto Service" className="logo-img" />
+                    <div className="masked-overlay">
+                      <div className="sheen" ref={sheenRef}></div>
+                    </div>
+                  </a>
+                </div>
+                
               </div>
             </div>
 
                                                                        {/* Right Navigation Links - Hidden on mobile */}
-           <div className="hidden md:flex gap-6">
+           <div className="relative z-10 hidden md:flex gap-6 lg:translate-x-5">
              {navLinks.slice(3).map((link) => (
                <a
                  key={link.name}

@@ -18,17 +18,17 @@ export default async function BlogPagedPage({ params }: { params: Params }) {
   if (!isContentfulConfigured()) {
     return (
       <div className="container mx-auto px-4 py-12 text-white">
-        <h1 className="text-3xl font-bold mb-6">Blog</h1>
+        <h1 className="text-3xl font-bold mb-6">AutoCare Insider</h1>
         <p className="opacity-80">Contentful is not configured. Add your API keys to .env.local to enable the blog.</p>
       </div>
     )
   }
 
-  const { posts, page, totalPages } = await getBlogPostsPage({ page: safePage, pageSize: 5 })
+  const { posts, page, totalPages } = await getBlogPostsPage({ page: safePage, pageSize: 3 })
 
   return (
     <div className="container mx-auto px-4 py-12 text-white">
-      <h1 className="text-3xl font-bold mb-8">Blog</h1>
+      <h1 className="text-3xl font-bold mb-8">AutoCare Insider</h1>
       {posts.length === 0 ? (
         <p className="opacity-80">No posts found.</p>
       ) : (

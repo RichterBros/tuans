@@ -128,7 +128,7 @@ body {
 
 .logo-img {
   display: block;
-  width: 425px;
+  width: 515px;
 }
 
 /* Masked overlay contains sparkle + sheen */
@@ -141,12 +141,14 @@ body {
   pointer-events: none;
   z-index: 2;
 
-  mask-image: url('/logo.png');
-  mask-size: cover;
+  mask-image: url('/tuan-logo-textv2 copy.png');
+  mask-size: contain;
   mask-repeat: no-repeat;
-  -webkit-mask-image: url('/logo.png');
-  -webkit-mask-size: cover;
+  mask-position: center;
+  -webkit-mask-image: url('/tuan-logo-textv2 copy.png');
+  -webkit-mask-size: contain;
   -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
 }
 
 
@@ -288,4 +290,25 @@ body {
   .hero-tilt-x-onload {
     animation: none;
   }
+}
+
+/* Yellow trapezoid backdrop for header logos */
+/* removed yellow backdrop styles */
+
+/* Ensure list bullets render inside article prose content */
+.prose ul {
+  list-style-type: disc;
+  list-style-position: outside;
+  margin-left: 1.25rem;
+  padding-left: 1.25rem;
+}
+.prose ol {
+  list-style-type: decimal;
+  list-style-position: outside;
+  margin-left: 1.25rem;
+  padding-left: 1.25rem;
+}
+.prose li {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }

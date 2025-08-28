@@ -118,11 +118,11 @@ export default function About() {
         </section>
 
         {/* Main Content Section */}
-        <section className="pt-16 pb-0 -mb-[150px] bg-white">
+        <section className="pt-16 pb-0 -mb-[200px] bg-white">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 lg:grid-rows-2 gap-12 max-w-6xl mx-auto">
               {/* Left Column - About Us (Top Row) */}
-              <div className="space-y-6 lg:col-start-1 lg:row-start-1">
+              <div className="space-y-6 lg:col-start-1 lg:row-start-1 h-full">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">
                   Tuans Auto Service Is Family Owned And Operated
                 </h2>
@@ -158,7 +158,7 @@ export default function About() {
               </div>
 
               {/* Right Column - Fair Pricing and Warranty (Top Row) */}
-              <div className="space-y-6 lg:col-start-2 lg:row-start-1">
+              <div className="space-y-6 lg:col-start-2 lg:row-start-1 h-full flex flex-col">
                 
                 
                 <h3 className="text-2xl font-bold text-gray-800 mb-6">
@@ -172,7 +172,7 @@ export default function About() {
                 </div>
                 
                 {/* Shop Exterior Image Placeholder - This is the trigger */}
-                <div className="w-full h-[206px] bg-gray-300 rounded-lg flex items-center justify-center mb-4 fade-in-from-right mt-[17px]" id="image-trigger">
+                <div className="w-full h-[206px] bg-gray-300 rounded-lg flex items-center justify-center mb-4 fade-in-from-right mt-auto" id="image-trigger">
                   <span className="text-gray-600 text-sm">Shop Exterior with Red Sports Car</span>
                 </div>
                 
