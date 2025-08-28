@@ -55,7 +55,7 @@ export default function Home() {
         // Parallax: move video at 40% of scroll speed, starting from -100px
         const offset = window.scrollY * 0.4
         // Keep video centered on smaller screens, apply parallax on larger screens
-        const isSmallScreen = window.innerWidth < 1024
+        const isSmallScreen = window.innerWidth < 1280
         if (isSmallScreen) {
           videoRef.current.style.transform = 'translateY(0px)'
         } else {
@@ -95,7 +95,7 @@ export default function Home() {
     // Handle resize events
     const handleResize = () => {
       if (bgRef.current && videoRef.current) {
-        const isSmallScreen = window.innerWidth < 1024
+        const isSmallScreen = window.innerWidth < 1280
         if (isSmallScreen) {
           videoRef.current.style.transform = 'translateY(0px)'
         } else {

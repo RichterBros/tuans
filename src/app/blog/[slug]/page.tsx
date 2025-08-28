@@ -32,7 +32,8 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   }
 
   return (
-    <article className="container mx-auto px-4 py-12 text-white">
+    <section className="w-full min-h-screen py-12" style={{ background: 'linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgb(131, 136, 132) 100%)', backgroundAttachment: 'fixed' }}>
+    <article className="mx-auto text-white px-4 md:px-6 max-w-[900px]">
       <header className="mb-8">
         <h1 className="text-3xl font-bold">{post.title}</h1>
         {post.publishedAt ? (
@@ -50,6 +51,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           : <p className="opacity-80">No content.</p>}
       </div>
     </article>
+    </section>
   )
 }
 
