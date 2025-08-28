@@ -170,23 +170,23 @@ export default function About() {
                   </div>
                 </div>
                 
-                {/* Shop Exterior Image Placeholder - This is the trigger */}
-                <div className="w-full h-[206px] bg-gray-300 rounded-lg flex items-center justify-center mb-0 fade-in-from-right mt-auto" id="image-trigger">
-                  <span className="text-gray-600 text-sm">Shop Exterior with Red Sports Car</span>
+                {/* Shop Exterior Image - trigger */}
+                <div className="w-full h-[306px] rounded-lg overflow-hidden mb-0 fade-in-from-right mt-auto" id="image-trigger">
+                  <img src="/shop-exterior-red-car.jpg" alt="Shop Exterior with Red Sports Car" className="w-full h-full object-cover" style={{ objectPosition: 'center 60%' }} />
                 </div>
                 
-                {/* Team Image Placeholder - Shown on mobile, hidden on desktop */}
-                <div className="block lg:hidden w-full h-64 bg-gray-300 rounded-lg flex items-center justify-center fade-in-from-left" id="team-image-mobile">
-                  <span className="text-gray-600 text-sm">Team Photo with Vintage Truck</span>
+                {/* Team Image - Shown on mobile, hidden on desktop */}
+                <div className="block lg:hidden w-full h-64 rounded-lg overflow-hidden fade-in-from-left" id="team-image-mobile">
+                  <img src="/team_straight_on_front.jpg" alt="Team Photo" className="w-full h-full object-cover" />
                 </div>
               </div>
 
               {/* Bottom Row - Aligned Grey Boxes */}
-              <div className="hidden lg:flex w-full h-64 bg-gray-300 rounded-lg items-center justify-center fade-in-from-left lg:col-start-1 lg:row-start-2 mb-0" id="team-image-desktop">
-                <span className="text-gray-600 text-sm">Team Photo with Vintage Truck</span>
+              <div className="hidden lg:block w-full h-64 rounded-lg overflow-hidden fade-in-from-left lg:col-start-1 lg:row-start-2 mb-0" id="team-image-desktop">
+                <img src="/team_straight_on_front.jpg" alt="Team Photo" className="w-full h-full object-cover" />
               </div>
-              <div className="w-full h-64 bg-gray-300 rounded-lg flex items-center justify-center fade-in-from-right lg:col-start-2 lg:row-start-2 mb-0" id="garage-image">
-                <span className="text-gray-600 text-sm">Garage Interior with Orange Classic Car on Lift</span>
+              <div className="w-full h-64 rounded-lg overflow-hidden fade-in-from-right lg:col-start-2 lg:row-start-2 mb-0" id="garage-image">
+                <img src="/Garage_Interior.jpg" alt="Garage Interior" className="w-full h-full object-cover" />
               </div>
             </div>
           </div>

@@ -324,3 +324,21 @@ body {
 .debug-outline > * {
   outline: 1px dashed rgba(0, 0, 0, 0.25);
 }
+
+/* Debug grid helpers - red variant for high visibility */
+.grid-debug-red {
+  background-image:
+    linear-gradient(rgba(255, 0, 0, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.2) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px;
+  background-position: 0 0, 0 0;
+}
+
+/* Full-page debug overlay - always on top, no interactions */
+.grid-overlay-red {
+  background-image:
+    linear-gradient(rgba(255, 0, 0, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.18) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px;
+  background-position: 0 0, 0 0;
+}

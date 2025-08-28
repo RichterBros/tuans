@@ -214,7 +214,8 @@ export default function Home() {
       {/* Three Column Info Section */}
       <section className="py-16" style={{ background: 'linear-gradient(to right, rgb(63, 139, 165), rgb(74, 162, 192), rgb(63, 139, 165))' }}>
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="rounded-2xl shadow-lg p-6 md:p-10">
+            <div className="grid md:grid-cols-3 gap-8">
             {/* Left Section - Repair and Maintenance */}
             <div className="text-center">
               <div className="mb-6">
@@ -267,17 +268,16 @@ export default function Home() {
                 <p className="font-semibold">Call to schedule: (503) 288-3927</p>
               </div>
             </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Dark blue separator line */}
-      <div style={{ height: '1px', backgroundColor: 'rgb(30, 46, 67)', width: '100%' }}></div>
-
       {/* Dark Header Section */}
-      <section className="py-16" style={{ background: 'linear-gradient(to left, rgb(74, 162, 192), rgb(63, 139, 165), rgb(74, 162, 192))' }}>
+      <section className="pt-4 pb-8 -mt-10" style={{ background: 'linear-gradient(to right, rgb(63, 139, 165), rgb(74, 162, 192), rgb(63, 139, 165))' }}>
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between">
+          <div className="rounded-2xl shadow-lg p-6 md:p-10">
+            <div className="flex flex-col md:flex-row items-center justify-between">
             {/* Left Side - Text */}
             <div className="flex-1 mb-8 md:mb-0">
               <h2 className="text-3xl md:text-4xl font-bold leading-tight" style={{ color: 'rgb(30, 46, 67)' }}>
@@ -294,6 +294,7 @@ export default function Home() {
                 className="w-full max-w-md h-64 object-cover rounded-lg fade-in-from-right cursor-pointer hover:opacity-90 transition-opacity glow-magenta"
                 onClick={() => setSelectedImage("/Honda_Prelude_1978 copy.jpg")}
               />
+            </div>
             </div>
           </div>
         </div>

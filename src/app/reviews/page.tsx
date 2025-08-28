@@ -263,17 +263,31 @@ export default function ReviewsPage() {
                See what our customers are saying on Google Reviews. We're proud of our 4.8-star rating from over 100 satisfied customers.
              </p>
              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-               <a 
-                 href="https://www.google.com/search?sca_esv=3d1e29cf7e253e0e&sxsrf=AE3TifMMmY80KX27jVgtwDGfiFEMvzp2yw:1754071508853&si=AMgyJEuzsz2NflaaWzrzdpjxXXRaJ2hfdMsbe_mSWso6src8s3laaL6cGY1EdG5rUpkMGEZ8u0zWPAg9F2ar_BxMO_noKfIlSWVp1y5iuVX_-qvEu4p5CfmDig_MZU9ut0_8XMaImOHJzrlugImdnJEcPONewS7Lww%3D%3D&q=Tuans+Auto+Services+Reviews&sa=X&ved=2ahUKEwj_osjJmeqOAxVCGBAIHYSmIMoQ0bkNegQINRAD&cshid=1754071582339652&biw=2048&bih=991&dpr=1.25"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-colors inline-flex items-center gap-2"
-               >
-                 <span>★★★★</span>
-                 <span>Read All Google Reviews</span>
-               </a>
-             
-             </div>
+              <a 
+                href="https://www.google.com/search?sca_esv=3d1e29cf7e253e0e&sxsrf=AE3TifMMmY80KX27jVgtwDGfiFEMvzp2yw:1754071508853&si=AMgyJEuzsz2NflaaWzrzdpjxXXRaJ2hfdMsbe_mSWso6src8s3laaL6cGY1EdG5rUpkMGEZ8u0zWPAg9F2ar_BxMO_noKfIlSWVp1y5iuVX_-qvEu4p5CfmDig_MZU9ut0_8XMaImOHJzrlugImdnJEcPONewS7Lww%3D%3D&q=Tuans+Auto+Services+Reviews&sa=X&ved=2ahUKEwj_osjJmeqOAxVCGBAIHYSmIMoQ0bkNegQINRAD&cshid=1754071582339652&biw=2048&bih=991&dpr=1.25"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold py-3 px-8 rounded-lg transition-colors inline-flex items-center gap-2"
+                style={{ 
+                  backgroundColor: 'rgb(74, 162, 192)',
+                  color: 'rgb(30, 46, 67)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgb(226, 183, 87)';
+                  const stars = e.currentTarget.querySelector('[data-stars="true"]') as HTMLElement | null;
+                  if (stars) stars.style.color = 'rgb(30, 46, 67)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgb(74, 162, 192)';
+                  const stars = e.currentTarget.querySelector('[data-stars="true"]') as HTMLElement | null;
+                  if (stars) stars.style.color = 'rgb(226, 183, 87)';
+                }}
+              >
+                <span data-stars="true" style={{ color: 'rgb(226, 183, 87)' }}>★★★★</span>
+                <span>Read All Google Reviews</span>
+              </a>
+            
+            </div>
            </div>
          </div>
 
