@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import React from 'react'
 import Navigation from './components/Navigation'
+import WedgeStack from './components/WedgeStack'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,6 +23,15 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
       </head>
       <body className={inter.className + ' bg-black'}>
+        {/* AngleCut corner wedges */}
+        {/* Original wedges disabled */}
+        <div className="anglecut-wedge anglecut-wedge-tl" style={{ zIndex: 101, display: 'none' }} />
+        <div className="anglecut-wedge anglecut-wedge-br" style={{ zIndex: 101, display: 'none' }} />
+        {/* Three separate layered wedges at the exact top-left baseline position */}
+        <WedgeStack enableParallax={true} topSize={120} gap={60} />
+        {/* Remove previous large copies now that band pattern is in place */}
+        
+        
         <Navigation />
         <main>{children}</main>
         
