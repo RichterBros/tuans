@@ -8,6 +8,8 @@ export default function Home() {
   const [hasPlayed, setHasPlayed] = useState(false)
   const [overlayFadeOut, setOverlayFadeOut] = useState(false)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const topCardRef = useRef<HTMLDivElement>(null)
+  const bottomCardRef = useRef<HTMLDivElement>(null)
 
   // Structured data for SEO
   const structuredData = {
@@ -77,7 +79,7 @@ export default function Home() {
       }
       
       // Fade-in animation on scroll
-      const fadeElements = document.querySelectorAll('.fade-in-trigger, .fade-in-from-right')
+      const fadeElements = document.querySelectorAll('.fade-in-trigger, .fade-in-from-right, .fade-in-from-bottom')
       fadeElements.forEach((element) => {
         const rect = element.getBoundingClientRect()
         const isVisible = rect.top < window.innerHeight * 0.5
@@ -102,14 +104,42 @@ export default function Home() {
           videoRef.current.style.transform = 'translateY(0px)'
         }
       }
+      // Keep the two cards heights in sync on resize
+      if (topCardRef.current && bottomCardRef.current) {
+        const topHeight = topCardRef.current.getBoundingClientRect().height
+        bottomCardRef.current.style.minHeight = `${Math.ceil(topHeight)}px`
+      }
     }
     
     window.addEventListener('scroll', handleScroll)
     window.addEventListener('resize', handleResize)
+
+    // Initial sync of card heights on mount and after images load
+    const syncHeights = () => {
+      if (topCardRef.current && bottomCardRef.current) {
+        const topHeight = topCardRef.current.getBoundingClientRect().height
+        bottomCardRef.current.style.minHeight = `${Math.ceil(topHeight)}px`
+      }
+    }
+    const rafSync = requestAnimationFrame(syncHeights)
+    const images = topCardRef.current?.querySelectorAll('img') || []
+    const imageLoadHandlers: Array<() => void> = []
+    images.forEach((img) => {
+      if (!img.complete) {
+        const onLoad = () => syncHeights()
+        imageLoadHandlers.push(onLoad)
+        img.addEventListener('load', onLoad)
+      }
+    })
     return () => {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('resize', handleResize)
       cancelAnimationFrame(raf)
+      cancelAnimationFrame(rafSync)
+      images.forEach((img, idx) => {
+        const handler = imageLoadHandlers[idx]
+        if (handler) img.removeEventListener('load', handler)
+      })
     }
   }, [hasPlayed])
 
@@ -136,37 +166,29 @@ export default function Home() {
           }}
         />
       </Head>
-      <main className="min-h-screen bg-gray-100">
+      <main className="min-h-screen">
+      {/* Fixed background video layer behind the entire page */}
+      <div ref={bgRef} className="fixed inset-0 w-full h-full pointer-events-none" style={{ zIndex: -2 }}>
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          playsInline
+          loop
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            console.log('Video failed to load:', e);
+          }}
+        >
+          <source src="/hero-video8.mp4" type="video/mp4" />
+        </video>
+      </div>
+      {/* Global dark gradient overlay over video */}
+      <div className="fixed inset-0 pointer-events-none" style={{ zIndex: -1, background: 'linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.25))' }} />
+      {/* Global black overlay fade on first load (matches hero) */}
+      <div className={`fixed inset-0 pointer-events-none transition-opacity duration-1000 ${overlayFadeOut ? 'opacity-0' : 'opacity-100'}`} style={{ zIndex: -1, backgroundColor: 'black' }} />
       {/* Hero Section with Video Background */}
       <section className="relative min-h-[60vh] md:h-[50vh] flex items-center justify-center overflow-hidden">
-        {/* Video Background */}
-        <div ref={bgRef} className="absolute inset-0 w-full h-[120%] -top-[10%]">
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            playsInline
-            loop
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              console.log('Video failed to load:', e);
-            }}
-          >
-            <source src="/hero-video8.mp4" type="video/mp4" />
-            {/* Fallback to image if video doesn't load */}
-            <div 
-              className="w-full h-full bg-cover bg-no-repeat"
-              style={{
-                backgroundImage: "url('/engine-hero.jpg')",
-                backgroundPosition: 'center -100px',
-              }}
-            />
-          </video>
-        </div>
-        {/* Intro black overlay fade to gradient in 500ms */}
-        <div className={`absolute inset-0 bg-black transition-opacity duration-1000 ${overlayFadeOut ? 'opacity-0' : 'opacity-100'}`} />
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/25" />
         {/* Content */}
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full max-w-5xl px-6">
           <div className="flex-1 text-center md:text-left">
@@ -204,9 +226,16 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-16" style={{ background: 'linear-gradient(to bottom, rgb(131, 136, 132) 0%, rgb(200, 205, 202) 35%, rgb(235, 237, 236) 100%)' }}>
-        <div className="container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-extrabold mb-4 leading-tight drop-shadow-lg text-center" style={{ color: 'rgb(30, 46, 67)' }}>Fair Pricing And A Comprehensive Warranty On All Repairs</h2>
+      <section className="relative py-16">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(circle at 50% 28%, rgba(131,136,132,0) 0%, rgba(131,136,132,0) 30%, rgba(131,136,132,0.18) 55%, rgba(131,136,132,0.45) 78%, rgba(131,136,132,0.75) 100%)'
+          }}
+        />
+        <div className="relative z-10 container mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-4 leading-tight drop-shadow-lg text-center" style={{ color: 'rgb(74, 162, 192)' }}>Fair Pricing And A Comprehensive Warranty On All Repairs</h2>
           
         </div>
       </section>
@@ -214,7 +243,7 @@ export default function Home() {
       {/* Three Column Info Section */}
       <section className="py-16" style={{ background: 'linear-gradient(to right, rgb(63, 139, 165), rgb(74, 162, 192), rgb(63, 139, 165))' }}>
         <div className="container mx-auto px-4">
-          <div className="rounded-2xl shadow-lg p-6 md:p-10">
+          <div ref={topCardRef} className="rounded-2xl shadow-lg p-6 md:p-10">
             <div className="grid md:grid-cols-3 gap-8">
             {/* Left Section - Repair and Maintenance */}
             <div className="text-center">
@@ -276,25 +305,32 @@ export default function Home() {
       {/* Dark Header Section */}
       <section className="pt-4 pb-8 -mt-10" style={{ background: 'linear-gradient(to right, rgb(63, 139, 165), rgb(74, 162, 192), rgb(63, 139, 165))' }}>
         <div className="container mx-auto px-4">
-          <div className="rounded-2xl shadow-lg p-6 md:p-10">
-            <div className="flex flex-col md:flex-row items-center justify-between">
-            {/* Left Side - Text */}
-            <div className="flex-1 mb-8 md:mb-0">
-              <h2 className="text-3xl md:text-4xl font-bold leading-tight" style={{ color: 'rgb(30, 46, 67)' }}>
-                Classics, restoration, 4X4, offroad<br />
-                and performance upgrades and<br />
-                fabrication
-              </h2>
-            </div>
-            {/* Right Side - Car Image */}
-            <div className="flex-1 flex justify-center md:justify-end">
-              <img 
-                src="/Honda_Prelude_1978 copy.jpg" 
-                alt="1978 Honda Prelude - Classic Car Restoration" 
-                className="w-full max-w-md h-64 object-cover rounded-lg fade-in-from-right cursor-pointer hover:opacity-90 transition-opacity glow-magenta"
-                onClick={() => setSelectedImage("/Honda_Prelude_1978 copy.jpg")}
+          <div ref={bottomCardRef} className="relative rounded-2xl shadow-lg p-6 md:p-10 overflow-hidden">
+            {/* Background image fills card */}
+            <div className="absolute inset-0">
+              <div
+                className="absolute inset-0 bg-cover bg-center fade-in-from-bottom"
+                style={{ backgroundImage: "url('/Honda_Prelude_1978 copy.jpg')" }}
+                onClick={() => setSelectedImage('/Honda_Prelude_1978 copy.jpg')}
+              />
+              {/* Gradient to keep left side readable - use brand light blue */}
+              <div
+                className="absolute inset-0"
+                style={{ background: 'linear-gradient(to right, rgba(74, 162, 192, 0.85), rgba(74, 162, 192, 0.6), rgba(74, 162, 192, 0))' }}
               />
             </div>
+            {/* Content */}
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between">
+              {/* Left Side - Text */}
+              <div className="flex-1 mb-8 md:mb-0">
+                <h2 className="text-3xl md:text-4xl font-bold leading-tight" style={{ color: 'rgb(30, 46, 67)' }}>
+                  Classics, restoration, 4X4, offroad<br />
+                  and performance upgrades and<br />
+                  fabrication
+                </h2>
+              </div>
+              {/* Right Side - Spacer to preserve layout on large screens */}
+              <div className="hidden md:block flex-1" />
             </div>
           </div>
         </div>

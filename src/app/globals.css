@@ -104,6 +104,18 @@ body {
   transform: translateX(0);
 }
 
+/* Fade in and slide up from bottom for background elements */
+.fade-in-from-bottom {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+}
+
+.fade-in-from-bottom.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .fade-in-from-left {
   opacity: 0;
   transform: translateX(-100px);
