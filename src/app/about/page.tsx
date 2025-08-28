@@ -118,11 +118,11 @@ export default function About() {
         </section>
 
         {/* Main Content Section */}
-        <section className="pt-16 pb-0 -mb-[200px] bg-white">
+        <section className="pt-16 pb-16 lg:pb-0 lg:-mb-[200px] bg-white">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 lg:grid-rows-2 gap-12 max-w-6xl mx-auto">
               {/* Left Column - About Us (Top Row) */}
-              <div className="space-y-6 lg:col-start-1 lg:row-start-1 h-full">
+              <div className="space-y-6 lg:col-start-1 lg:row-start-1 h-full lg:min-h-[520px] flex flex-col">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">
                   Tuans Auto Service Is Family Owned And Operated
                 </h2>
@@ -146,7 +146,7 @@ export default function About() {
                 </div>
                 
                 {/* Call to Action */}
-                <div className="mt-8 p-4 bg-gray-100 rounded-lg">
+                <div className="mt-auto p-4 bg-gray-100 rounded-lg">
                   <p className="text-lg font-bold text-gray-800 text-center">
                     FULL SERVICE AUTO REPAIR AND MAINTENANCE
                   </p>
@@ -158,21 +158,20 @@ export default function About() {
               </div>
 
               {/* Right Column - Fair Pricing and Warranty (Top Row) */}
-              <div className="space-y-6 lg:col-start-2 lg:row-start-1 h-full flex flex-col">
-                
-                
-                <h3 className="text-2xl font-bold text-gray-800 mb-6">
-                  Fair Pricing and a Comprehensive Warranty On All Repairs
-                </h3>
-                
-                <div className="space-y-4 text-gray-700 leading-relaxed">
-                  <p>
-                    We understand that your car is not only one of your biggest investments, but that its dependable operation is a critical part of your family's life. With that in mind, we have straightforward, fair pricing, a comprehensive warranty on all repairs and strive to interact with our customers as if they were members of our own family.
-                  </p>
+              <div className="space-y-6 lg:col-start-2 lg:row-start-1 h-full lg:min-h-[520px] flex flex-col">
+                <div className="flex-1 flex flex-col">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-6">
+                    Fair Pricing and a Comprehensive Warranty On All Repairs
+                  </h3>
+                  <div className="text-gray-700 leading-relaxed">
+                    <p>
+                      We understand that your car is not only one of your biggest investments, but that its dependable operation is a critical part of your family's life. With that in mind, we have straightforward, fair pricing, a comprehensive warranty on all repairs and strive to interact with our customers as if they were members of our own family.
+                    </p>
+                  </div>
                 </div>
                 
                 {/* Shop Exterior Image Placeholder - This is the trigger */}
-                <div className="w-full h-[206px] bg-gray-300 rounded-lg flex items-center justify-center mb-4 fade-in-from-right mt-auto" id="image-trigger">
+                <div className="w-full h-[206px] bg-gray-300 rounded-lg flex items-center justify-center mb-0 fade-in-from-right mt-auto" id="image-trigger">
                   <span className="text-gray-600 text-sm">Shop Exterior with Red Sports Car</span>
                 </div>
                 
@@ -183,10 +182,10 @@ export default function About() {
               </div>
 
               {/* Bottom Row - Aligned Grey Boxes */}
-              <div className="hidden lg:flex w-full h-64 bg-gray-300 rounded-lg items-center justify-center fade-in-from-left lg:col-start-1 lg:row-start-2" id="team-image-desktop">
+              <div className="hidden lg:flex w-full h-64 bg-gray-300 rounded-lg items-center justify-center fade-in-from-left lg:col-start-1 lg:row-start-2 mb-0" id="team-image-desktop">
                 <span className="text-gray-600 text-sm">Team Photo with Vintage Truck</span>
               </div>
-              <div className="w-full h-64 bg-gray-300 rounded-lg flex items-center justify-center fade-in-from-right lg:col-start-2 lg:row-start-2" id="garage-image">
+              <div className="w-full h-64 bg-gray-300 rounded-lg flex items-center justify-center fade-in-from-right lg:col-start-2 lg:row-start-2 mb-0" id="garage-image">
                 <span className="text-gray-600 text-sm">Garage Interior with Orange Classic Car on Lift</span>
               </div>
             </div>
