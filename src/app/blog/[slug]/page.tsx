@@ -1,3 +1,4 @@
+// src/app/blog/[slug]/page.tsx
 import React from 'react'
 import { getAllBlogPosts, getBlogPostBySlug, isContentfulConfigured } from '@/lib/contentful'
 import type { RichTextDocument, RichTextNode, RichTextMark } from '@/lib/contentful'
@@ -9,13 +10,11 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return posts.map((p) => ({ slug: p.slug }))
 }
 
-// Inline typing fixes the Netlify/Next.js type mismatch
+// Inline props to prevent PageProps mismatch
 export default async function BlogPostPage({
   params,
-  searchParams,
 }: {
   params: { slug: string }
-  searchParams?: { [key: string]: string | string[] | undefined }
 }) {
   const { slug } = params
 
@@ -52,7 +51,9 @@ export default async function BlogPostPage({
         <header className="mb-8">
           <h1 className="text-3xl font-bold">{post.title}</h1>
           {post.publishedAt && (
-            <p className="opacity-60 text-sm mt-2">{new Date(post.publishedAt).toLocaleDateString()}</p>
+            <p className="opacity-60 text-sm mt-2">
+              {new Date(post.publishedAt).toLocaleDateString()}
+            </p>
           )}
         </header>
 
@@ -76,6 +77,7 @@ export default async function BlogPostPage({
   )
 }
 
+// RichText rendering helpers
 function RichTextRenderer({ document }: { document: RichTextDocument }) {
   return <div>{document.content.map((node, idx) => <Node key={idx} node={node} />)}</div>
 }
@@ -109,9 +111,8 @@ function Node({ node }: { node: RichTextNode }) {
       )
     }
     case 'text': {
-      const textValue: string = (node.value as string) ?? ''
-      let el: React.ReactNode = textValue
-      const marks: RichTextMark[] = Array.isArray(node.marks) ? (node.marks as RichTextMark[]) : []
+      let el: React.ReactNode = node.value || ''
+      const marks: RichTextMark[] = Array.isArray(node.marks) ? node.marks : []
       marks.forEach((m: RichTextMark) => {
         if (m.type === 'bold') el = <strong>{el}</strong>
         if (m.type === 'italic') el = <em>{el}</em>
