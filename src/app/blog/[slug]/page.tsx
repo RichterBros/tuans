@@ -41,7 +41,9 @@ export default async function BlogPostPage({ params }: { params: Params }) {
         ) : null}
       </header>
       {post.heroImageUrl ? (
-        <img src={post.heroImageUrl} alt="" className="w-full max-h-[420px] object-cover rounded mb-8" />
+        <div className="mb-8 overflow-hidden card-angled">
+          <img src={post.heroImageUrl} alt="" className="w-full max-h-[420px] object-cover" />
+        </div>
       ) : null}
       <div className="prose prose-invert max-w-none">
         {post.bodyDocument

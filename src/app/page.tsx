@@ -305,8 +305,8 @@ export default function Home() {
       {/* Services Section */}
       <section ref={fairSectionRef} className="relative overflow-hidden py-16">
         {/* Left and right wedge-strip overlays with hard bands; refs used for parallax translateX */}
-        <div ref={wedgeLeftRef} className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(160,165,162,1) 0%, rgba(235,237,236,0.9) 50%, rgba(235,237,236,0) 50%)', zIndex: 20, willChange: 'transform' }} />
-        <div ref={wedgeRightRef} className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(315deg, rgba(160,165,162,1) 0%, rgba(235,237,236,0.9) 50%, rgba(235,237,236,0) 50%)', zIndex: 20, willChange: 'transform' }} />
+        <div ref={wedgeLeftRef} className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(30,46,67,1) 25%, rgba(74,162,197,1) 50%, rgba(48, 131, 90, 0) 50%)', zIndex: 20, willChange: 'transform' }} />
+        <div ref={wedgeRightRef} className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(315deg, rgba(30,46,67,1) 25%, rgba(74,162,197,1) 50%, rgba(235,237,236,0) 50%)', zIndex: 20, willChange: 'transform' }} />
         <div className="relative container mx-auto px-4">
           <div ref={fairHeadingWrapperRef} className="fade-in-from-bottom">
             <h2 ref={fairHeadingRef} className="text-2xl md:text-3xl font-extrabold mb-4 leading-tight drop-shadow-lg text-center" style={{ color: 'rgb(74, 162, 192)' }}>Fair Pricing And A Comprehensive Warranty On All Repairs</h2>

@@ -35,7 +35,7 @@ export default async function BlogPagedPage({ params }: { params: Params }) {
         <>
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post) => (
-              <li key={post.id} className="bg-[rgb(30,46,67)] rounded-lg overflow-hidden shadow">
+              <li key={post.id} className="bg-[rgb(30,46,67)] overflow-hidden shadow card-angled">
                 {post.heroImageUrl ? (
                   <img src={post.heroImageUrl} alt="" className="w-full h-40 object-cover" />
                 ) : null}
@@ -59,15 +59,15 @@ export default async function BlogPagedPage({ params }: { params: Params }) {
           {/* Pagination controls */}
           <div className="flex items-center justify-center gap-4 mt-10">
             {page > 1 ? (
-              <Link href={`/blog/page/${page - 1}`} className="px-3 py-2 bg-[rgb(30,46,67)] rounded hover:opacity-80">Previous</Link>
+              <Link href={`/blog/page/${page - 1}`} className="px-3 py-2 bg-[rgb(30,46,67)] btn-angled hover:opacity-80">Previous</Link>
             ) : (
-              <span className="px-3 py-2 bg-gray-700 rounded opacity-50 cursor-not-allowed">Previous</span>
+              <span className="px-3 py-2 bg-gray-700 btn-angled opacity-50 cursor-not-allowed">Previous</span>
             )}
             <span className="opacity-80 text-sm">Page {page} of {totalPages || 1}</span>
             {totalPages && page < totalPages ? (
-              <Link href={`/blog/page/${page + 1}`} className="px-3 py-2 bg-[rgb(30,46,67)] rounded hover:opacity-80">Next</Link>
+              <Link href={`/blog/page/${page + 1}`} className="px-3 py-2 bg-[rgb(30,46,67)] btn-angled hover:opacity-80">Next</Link>
             ) : (
-              <span className="px-3 py-2 bg-gray-700 rounded opacity-50 cursor-not-allowed">Next</span>
+              <span className="px-3 py-2 bg-gray-700 btn-angled opacity-50 cursor-not-allowed">Next</span>
             )}
           </div>
         </>

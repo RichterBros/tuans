@@ -180,8 +180,8 @@ export default function ContactPage() {
                 <h4 className="text-lg font-semibold text-gray-900 mb-3">We're here for you:</h4>
                 <div className="space-y-1 text-gray-700">
                   <p>Mon-Fri: 8:30 am - 5:30 pm</p>
-                  <p>Saturdays: 8:30 am - 2:00 pm</p>
-                  <p>Sundays: Closed</p>
+                  <p>Sat-Sun: Closed</p>
+                  
                 </div>
               </div>
 
@@ -362,7 +362,7 @@ export default function ContactPage() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Business Hours</h3>
                 <p className="text-gray-600">Mon-Fri: 8:30AM-5:30PM</p>
-                <p className="text-sm text-gray-500">Sat: 8:00 am - 2:00 pm</p>
+                <p className="text-sm text-gray-500">Sat-Sun: Closed</p>
               </div>
             </div>
           </div>
