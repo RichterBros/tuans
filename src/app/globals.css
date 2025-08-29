@@ -190,6 +190,26 @@ body {
   .anglecut-wedge { --wedge-size: 112px; }
 }
 
+/* Responsive z-index control for WedgeStack layers */
+.wedge-layer {
+  position: fixed;
+  pointer-events: none;
+}
+.wedge-bot { z-index: 3500; }
+.wedge-mid { z-index: 3501; }
+.wedge-top { z-index: 3502; }
+
+/* Hide wedges on mobile */
+@media (max-width: 767px) {
+  .wedge-layer { display: none; }
+}
+
+/* Ensure all site content sits above wedges at all sizes */
+.site-content {
+  position: relative;
+  z-index: 2000;
+}
+
 /* Top-left diagonal stripe bands (transparent outside area) */
 .wedge-band,
 .wedge-band-2,

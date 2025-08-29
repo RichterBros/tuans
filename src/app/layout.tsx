@@ -28,15 +28,16 @@ export default function RootLayout({
         <div className="anglecut-wedge anglecut-wedge-tl" style={{ zIndex: 101, display: 'none' }} />
         <div className="anglecut-wedge anglecut-wedge-br" style={{ zIndex: 101, display: 'none' }} />
         {/* Three separate layered wedges at the exact top-left baseline position */}
-        <WedgeStack enableParallax={true} topSize={120} gap={60} />
+        <WedgeStack enableParallax={true} topSize={120} gap={60} position="tl" />
+        <WedgeStack enableParallax={true} topSize={120} gap={60} position="br" />
         {/* Remove previous large copies now that band pattern is in place */}
         
         
         <Navigation />
-        <main>{children}</main>
+        <main className="site-content">{children}</main>
         
         {/* Footer Section */}
-        <footer style={{ backgroundColor: 'rgb(30, 46, 67)' }}>
+        <footer style={{ backgroundColor: 'rgb(30, 46, 67)', position: 'relative', zIndex: 2500 }}>
           {/* Main Footer Content */}
           <div className="py-16">
             <div className="container mx-auto px-4">

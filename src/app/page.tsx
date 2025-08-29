@@ -10,6 +10,8 @@ export default function Home() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const topCardRef = useRef<HTMLDivElement>(null)
   const bottomCardRef = useRef<HTMLDivElement>(null)
+  const wedgeLeftRef = useRef<HTMLDivElement>(null)
+  const wedgeRightRef = useRef<HTMLDivElement>(null)
 
   // Structured data for SEO
   const structuredData = {
@@ -87,6 +89,16 @@ export default function Home() {
           element.classList.add('visible')
         }
       })
+
+      // Parallax the wedge bands in the Fair Pricing section (left moves left, right moves right)
+      const y = window.scrollY || 0
+      const px = Math.round(y * 3.0)
+      if (wedgeLeftRef.current) {
+        wedgeLeftRef.current.style.transform = `translateX(${-px}px)`
+      }
+      if (wedgeRightRef.current) {
+        wedgeRightRef.current.style.transform = `translateX(${px}px)`
+      }
     }
     
     // Set initial position for mobile
@@ -230,13 +242,9 @@ export default function Home() {
 
       {/* Services Section */}
       <section className="relative py-16">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              'radial-gradient(circle at 50% 28%, rgba(131,136,132,0) 0%, rgba(131,136,132,0) 30%, rgba(131,136,132,0.18) 55%, rgba(188, 188, 188, 0.45) 78%, rgba(234, 234, 234, 0.85) 100%, rgb(231, 231, 231) 100%)'
-          }}
-        />
+        {/* Left and right wedge-strip overlays with hard bands; refs used for parallax translateX */}
+        <div ref={wedgeLeftRef} className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(235,237,236,0.95) 0% 18%, rgba(235,237,236,0.6) 18% 26%, rgba(235,237,236,0.3) 26% 34%, rgba(235,237,236,0) 34% 100%)' }} />
+        <div ref={wedgeRightRef} className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(315deg, rgba(235,237,236,0.95) 0% 18%, rgba(235,237,236,0.6) 18% 26%, rgba(235,237,236,0.3) 26% 34%, rgba(235,237,236,0) 34% 100%)' }} />
         <div className="relative z-10 container mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-extrabold mb-4 leading-tight drop-shadow-lg text-center" style={{ color: 'rgb(74, 162, 192)' }}>Fair Pricing And A Comprehensive Warranty On All Repairs</h2>
           
