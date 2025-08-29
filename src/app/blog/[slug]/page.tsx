@@ -9,13 +9,14 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return posts.map((p) => ({ slug: p.slug }))
 }
 
+// Only include params; omit searchParams for stricter typing
 type PageProps = {
   params: { slug: string }
-  searchParams?: { [key: string]: string | string[] | undefined }
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
   const { slug } = params
+
   if (!isContentfulConfigured()) {
     return (
       <div className="container mx-auto px-4 py-12 text-white">
@@ -36,27 +37,37 @@ export default async function BlogPostPage({ params }: PageProps) {
   }
 
   return (
-    <section className="w-full min-h-screen py-12" style={{ background: 'linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgb(131, 136, 132) 100%)', backgroundAttachment: 'fixed' }}>
-    <article className="mx-auto text-white px-4 md:px-6 max-w-[900px]">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold">{post.title}</h1>
-        {post.publishedAt ? (
-          <p className="opacity-60 text-sm mt-2">{new Date(post.publishedAt).toLocaleDateString()}</p>
-        ) : null}
-      </header>
-      {post.heroImageUrl ? (
-        <div className="mb-8 overflow-hidden card-angled">
-          <img src={post.heroImageUrl} alt="" className="w-full max-h-[420px] object-cover" />
+    <section
+      className="w-full min-h-screen py-12"
+      style={{
+        background: 'linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgb(131, 136, 132) 100%)',
+        backgroundAttachment: 'fixed',
+      }}
+    >
+      <article className="mx-auto text-white px-4 md:px-6 max-w-[900px]">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold">{post.title}</h1>
+          {post.publishedAt && (
+            <p className="opacity-60 text-sm mt-2">{new Date(post.publishedAt).toLocaleDateString()}</p>
+          )}
+        </header>
+
+        {post.heroImageUrl && (
+          <div className="mb-8 overflow-hidden card-angled">
+            <img src={post.heroImageUrl} alt="" className="w-full max-h-[420px] object-cover" />
+          </div>
+        )}
+
+        <div className="prose prose-invert max-w-none">
+          {post.bodyDocument ? (
+            <RichTextRenderer document={post.bodyDocument as RichTextDocument} />
+          ) : post.body ? (
+            <div dangerouslySetInnerHTML={{ __html: post.body }} />
+          ) : (
+            <p className="opacity-80">No content.</p>
+          )}
         </div>
-      ) : null}
-      <div className="prose prose-invert max-w-none">
-        {post.bodyDocument
-          ? <RichTextRenderer document={post.bodyDocument as RichTextDocument} />
-          : post.body
-          ? <div dangerouslySetInnerHTML={{ __html: post.body }} />
-          : <p className="opacity-80">No content.</p>}
-      </div>
-    </article>
+      </article>
     </section>
   )
 }
@@ -87,13 +98,15 @@ function Node({ node }: { node: RichTextNode }) {
       return <blockquote>{children}</blockquote>
     case 'hyperlink': {
       const href = node.data?.uri || '#'
-      return <a href={href} className="underline" target="_blank" rel="noreferrer">{children}</a>
+      return (
+        <a href={href} className="underline" target="_blank" rel="noreferrer">
+          {children}
+        </a>
+      )
     }
     case 'text': {
-      const text = node.value || ''
-      const marks = node.marks || []
-      let el: React.ReactNode = text
-      marks.forEach((m) => {
+      let el: React.ReactNode = node.value || ''
+      (node.marks || []).forEach((m) => {
         if (m.type === 'bold') el = <strong>{el}</strong>
         if (m.type === 'italic') el = <em>{el}</em>
         if (m.type === 'underline') el = <u>{el}</u>
@@ -105,5 +118,3 @@ function Node({ node }: { node: RichTextNode }) {
       return <>{children}</>
   }
 }
-
-
