@@ -12,6 +12,8 @@ export default function Home() {
   const bottomCardRef = useRef<HTMLDivElement>(null)
   const wedgeLeftRef = useRef<HTMLDivElement>(null)
   const wedgeRightRef = useRef<HTMLDivElement>(null)
+  const fairSectionRef = useRef<HTMLDivElement>(null)
+  const fairHeadingRef = useRef<HTMLHeadingElement>(null)
 
   // Structured data for SEO
   const structuredData = {
@@ -93,11 +95,31 @@ export default function Home() {
       // Parallax the wedge bands in the Fair Pricing section (left moves left, right moves right)
       const y = window.scrollY || 0
       const px = Math.round(y * 3.0)
+      const slowY = Math.round(y * 0.2)
       if (wedgeLeftRef.current) {
-        wedgeLeftRef.current.style.transform = `translateX(${-px}px)`
+        wedgeLeftRef.current.style.transform = `translate(${-px}px, ${slowY}px)`
       }
       if (wedgeRightRef.current) {
-        wedgeRightRef.current.style.transform = `translateX(${px}px)`
+        wedgeRightRef.current.style.transform = `translate(${px}px, ${slowY}px)`
+      }
+
+      // Fade the Fair Pricing heading from dark blue to light blue based on scroll
+      if (fairSectionRef.current && fairHeadingRef.current) {
+        const rect = fairSectionRef.current.getBoundingClientRect()
+        const viewportHeight = window.innerHeight || 1
+        // Start fading when the section's top reaches ~80% of the viewport,
+        // finish by the time it reaches ~20% from the top.
+        const start = viewportHeight * 0.8
+        const end = viewportHeight * 0.2
+        const denom = Math.max(1, start - end)
+        const raw = (start - rect.top) / denom
+        const progress = Math.max(0, Math.min(1, raw))
+        const dark = { r: 30, g: 46, b: 67 }
+        const light = { r: 74, g: 162, b: 192 }
+        const r = Math.round(dark.r + (light.r - dark.r) * progress)
+        const g = Math.round(dark.g + (light.g - dark.g) * progress)
+        const b = Math.round(dark.b + (light.b - dark.b) * progress)
+        fairHeadingRef.current.style.color = `rgb(${r}, ${g}, ${b})`
       }
     }
     
@@ -207,7 +229,7 @@ export default function Home() {
         {/* Content */}
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full max-w-5xl px-6">
           <div className="flex-1 text-center md:text-left">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight drop-shadow-lg hero-heading-slide-in-right" style={{ color: 'rgb(74, 162, 192)' }}>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight hero-heading-slide-in-right" style={{ color: 'rgb(74, 162, 192)', textShadow: '0 3px 0 rgba(0, 0, 0, 0.6)' }}>
               Full Service Auto Repair and Maintenance
             </h1>
             <p className="text-lg md:text-xl mb-4 font-semibold drop-shadow-lg" style={{ color: 'rgb(74, 162, 192)' }}>
@@ -241,12 +263,12 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="relative py-16">
+      <section ref={fairSectionRef} className="relative py-16">
         {/* Left and right wedge-strip overlays with hard bands; refs used for parallax translateX */}
-        <div ref={wedgeLeftRef} className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(235,237,236,0.95) 0% 18%, rgba(235,237,236,0.6) 18% 26%, rgba(235,237,236,0.3) 26% 34%, rgba(235,237,236,0) 34% 100%)' }} />
-        <div ref={wedgeRightRef} className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(315deg, rgba(235,237,236,0.95) 0% 18%, rgba(235,237,236,0.6) 18% 26%, rgba(235,237,236,0.3) 26% 34%, rgba(235,237,236,0) 34% 100%)' }} />
+        <div ref={wedgeLeftRef} className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(235,237,236,0.95) 0% 25%, rgba(235,237,236,0.6) 25% 45%, rgba(235,237,236,0.3) 45% 55%, rgba(235,237,236,0) 55% 100%)', zIndex: -1, willChange: 'transform' }} />
+        <div ref={wedgeRightRef} className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(315deg, rgba(235,237,236,0.95) 0% 25%, rgba(235,237,236,0.6) 25% 45%, rgba(235,237,236,0.3) 45% 55%, rgba(235,237,236,0) 55% 100%)', zIndex: -1, willChange: 'transform' }} />
         <div className="relative z-10 container mx-auto px-4">
-          <h2 className="text-2xl md:text-3xl font-extrabold mb-4 leading-tight drop-shadow-lg text-center" style={{ color: 'rgb(74, 162, 192)' }}>Fair Pricing And A Comprehensive Warranty On All Repairs</h2>
+          <h2 ref={fairHeadingRef} className="text-2xl md:text-3xl font-extrabold mb-4 leading-tight drop-shadow-lg text-center" style={{ color: 'rgb(30, 46, 67)' }}>Fair Pricing And A Comprehensive Warranty On All Repairs</h2>
           
         </div>
       </section>
