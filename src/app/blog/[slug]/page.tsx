@@ -11,8 +11,7 @@ export async function generateStaticParams(): Promise<Params[]> {
   return posts.map((p) => ({ slug: p.slug }))
 }
 
-export default async function BlogPostPage(props: Promise<{ params: Params }>) {
-  const { params } = await props
+export default async function BlogPostPage({ params }: { params: Params }) {
   if (!isContentfulConfigured()) {
     return (
       <div className="container mx-auto px-4 py-12 text-white">
