@@ -4,7 +4,7 @@ import type { RichTextDocument, RichTextNode } from '@/lib/contentful'
 
 export const revalidate = 60
 
-export async function generateStaticParams(): Promise<PageProps["params"][]> {
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = await getAllBlogPosts({ limit: 100 })
   return posts.map((p) => ({ slug: p.slug }))
 }
