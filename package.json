@@ -12,6 +12,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "18"
+  },
   "dependencies": {
     "next": "^15.3.5",
     "nodemailer": "^6.9.13",
