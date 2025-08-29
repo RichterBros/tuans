@@ -9,7 +9,7 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return posts.map((p) => ({ slug: p.slug }))
 }
 
-// INLINE typing prevents Netlify type mismatch for async server components
+// Inline typing prevents Netlify type mismatch
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const { slug } = params
 
@@ -17,7 +17,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     return (
       <div className="container mx-auto px-4 py-12 text-white">
         <h1 className="text-3xl font-bold mb-6">Blog</h1>
-        <p className="opacity-80">Contentful is not configured. Add your API keys to .env.local to enable the blog.</p>
+        <p className="opacity-80">
+          Contentful is not configured. Add your API keys to .env.local to enable the blog.
+        </p>
       </div>
     )
   }
@@ -44,7 +46,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         <header className="mb-8">
           <h1 className="text-3xl font-bold">{post.title}</h1>
           {post.publishedAt && (
-            <p className="opacity-60 text-sm mt-2">{new Date(post.publishedAt).toLocaleDateString()}</p>
+            <p className="opacity-60 text-sm mt-2">
+              {new Date(post.publishedAt).toLocaleDateString()}
+            </p>
           )}
         </header>
 
