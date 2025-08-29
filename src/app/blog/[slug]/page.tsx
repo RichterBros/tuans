@@ -4,17 +4,16 @@ import type { RichTextDocument, RichTextNode } from '@/lib/contentful'
 
 export const revalidate = 60
 
-type Params = { slug: string }
-
-export async function generateStaticParams(): Promise<Params[]> {
+export async function generateStaticParams(): Promise<PageProps["params"][]> {
   const posts = await getAllBlogPosts({ limit: 100 })
   return posts.map((p) => ({ slug: p.slug }))
 }
 
-interface PageProps {
+type PageProps = {
   params: {
     slug: string
   }
+  searchParams?: { [key: string]: string | string[] | undefined }
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
