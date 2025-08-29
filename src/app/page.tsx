@@ -14,6 +14,11 @@ export default function Home() {
   const wedgeRightRef = useRef<HTMLDivElement>(null)
   const fairSectionRef = useRef<HTMLDivElement>(null)
   const fairHeadingRef = useRef<HTMLHeadingElement>(null)
+  const fairHeadingWrapperRef = useRef<HTMLDivElement>(null)
+  const carBgRef = useRef<HTMLDivElement>(null)
+  const heroHeadingRef = useRef<HTMLHeadingElement>(null)
+  const heroAnimationDoneRef = useRef<boolean>(false)
+  const separationDoneRef = useRef<boolean>(false)
 
   // Structured data for SEO
   const structuredData = {
@@ -58,9 +63,8 @@ export default function Home() {
 
     const handleScroll = () => {
       if (bgRef.current && videoRef.current) {
-        // Parallax: move video at 40% of scroll speed, starting from -100px
+        // Parallax: move video at 40% of scroll speed
         const offset = window.scrollY * 0.4
-        // Keep video centered on smaller screens, apply parallax on larger screens
         const isSmallScreen = window.innerWidth < 1280
         if (isSmallScreen) {
           videoRef.current.style.transform = 'translateY(0px)'
@@ -92,35 +96,12 @@ export default function Home() {
         }
       })
 
-      // Parallax the wedge bands in the Fair Pricing section (left moves left, right moves right)
-      const y = window.scrollY || 0
-      const px = Math.round(y * 3.0)
-      const slowY = Math.round(y * 0.2)
-      if (wedgeLeftRef.current) {
-        wedgeLeftRef.current.style.transform = `translate(${-px}px, ${slowY}px)`
-      }
-      if (wedgeRightRef.current) {
-        wedgeRightRef.current.style.transform = `translate(${px}px, ${slowY}px)`
+      // If car background has faded in, attempt reveal (no scroll-based separation)
+      if (carBgRef.current && carBgRef.current.classList.contains('visible')) {
+        tryRevealAndSeparate()
       }
 
-      // Fade the Fair Pricing heading from dark blue to light blue based on scroll
-      if (fairSectionRef.current && fairHeadingRef.current) {
-        const rect = fairSectionRef.current.getBoundingClientRect()
-        const viewportHeight = window.innerHeight || 1
-        // Start fading when the section's top reaches ~80% of the viewport,
-        // finish by the time it reaches ~20% from the top.
-        const start = viewportHeight * 0.8
-        const end = viewportHeight * 0.2
-        const denom = Math.max(1, start - end)
-        const raw = (start - rect.top) / denom
-        const progress = Math.max(0, Math.min(1, raw))
-        const dark = { r: 30, g: 46, b: 67 }
-        const light = { r: 74, g: 162, b: 192 }
-        const r = Math.round(dark.r + (light.r - dark.r) * progress)
-        const g = Math.round(dark.g + (light.g - dark.g) * progress)
-        const b = Math.round(dark.b + (light.b - dark.b) * progress)
-        fairHeadingRef.current.style.color = `rgb(${r}, ${g}, ${b})`
-      }
+      // Stop scroll-driven wedge/heading movement; reveal logic handled elsewhere
     }
     
     // Set initial position for mobile
@@ -147,6 +128,7 @@ export default function Home() {
     
     window.addEventListener('scroll', handleScroll)
     window.addEventListener('resize', handleResize)
+    // Initialize positions on mount
 
     // Initial sync of card heights on mount and after images load
     const syncHeights = () => {
@@ -176,6 +158,41 @@ export default function Home() {
       })
     }
   }, [hasPlayed])
+
+  // Start wedges together on load; coordinate separation after hero + car resolve
+  useEffect(() => {
+    // Together on initial render
+    if (wedgeLeftRef.current) wedgeLeftRef.current.style.transform = 'translate(0, 0)'
+    if (wedgeRightRef.current) wedgeRightRef.current.style.transform = 'translate(0, 0)'
+
+    const onHeroEnd = () => {
+      heroAnimationDoneRef.current = true
+      tryRevealAndSeparate()
+    }
+    const heroEl = heroHeadingRef.current
+    heroEl?.addEventListener('animationend', onHeroEnd)
+    return () => heroEl?.removeEventListener('animationend', onHeroEnd)
+  }, [])
+
+  // Reveal heading and separate wedges once both conditions are satisfied
+  const tryRevealAndSeparate = () => {
+    if (separationDoneRef.current) return
+    if (!heroAnimationDoneRef.current) return
+    const GAP_PX = 1050
+    const HALF_GAP = Math.round(GAP_PX / 2)
+    const leftEl = wedgeLeftRef.current
+    const rightEl = wedgeRightRef.current
+    if (leftEl) {
+      leftEl.style.transition = 'transform 900ms cubic-bezier(0.85, 0, 0.15, 1)'
+      leftEl.style.transform = `translate(${-HALF_GAP}px, 0)`
+    }
+    if (rightEl) {
+      rightEl.style.transition = 'transform 900ms cubic-bezier(0.85, 0, 0.15, 1)'
+      rightEl.style.transform = `translate(${HALF_GAP}px, 0)`
+    }
+    if (fairHeadingWrapperRef.current) fairHeadingWrapperRef.current.classList.add('visible')
+    separationDoneRef.current = true
+  }
 
   return (
     <>
@@ -229,7 +246,7 @@ export default function Home() {
         {/* Content */}
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full max-w-5xl px-6">
           <div className="flex-1 text-center md:text-left">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight hero-heading-slide-in-right" style={{ color: 'rgb(74, 162, 192)', textShadow: '0 3px 0 rgba(0, 0, 0, 0.6)' }}>
+            <h1 ref={heroHeadingRef} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight hero-heading-slide-in-right" style={{ backgroundImage: 'linear-gradient(to right, rgb(96, 178, 202) 0%, rgb(74, 162, 192) 100%)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', color: 'transparent' }}>
               Full Service Auto Repair and Maintenance
             </h1>
             <p className="text-lg md:text-xl mb-4 font-semibold drop-shadow-lg" style={{ color: 'rgb(74, 162, 192)' }}>
@@ -263,12 +280,14 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section ref={fairSectionRef} className="relative py-16">
+      <section ref={fairSectionRef} className="relative overflow-hidden py-16">
         {/* Left and right wedge-strip overlays with hard bands; refs used for parallax translateX */}
-        <div ref={wedgeLeftRef} className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(235,237,236,0.95) 0% 25%, rgba(235,237,236,0.6) 25% 45%, rgba(235,237,236,0.3) 45% 55%, rgba(235,237,236,0) 55% 100%)', zIndex: -1, willChange: 'transform' }} />
-        <div ref={wedgeRightRef} className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(315deg, rgba(235,237,236,0.95) 0% 25%, rgba(235,237,236,0.6) 25% 45%, rgba(235,237,236,0.3) 45% 55%, rgba(235,237,236,0) 55% 100%)', zIndex: -1, willChange: 'transform' }} />
-        <div className="relative z-10 container mx-auto px-4">
-          <h2 ref={fairHeadingRef} className="text-2xl md:text-3xl font-extrabold mb-4 leading-tight drop-shadow-lg text-center" style={{ color: 'rgb(30, 46, 67)' }}>Fair Pricing And A Comprehensive Warranty On All Repairs</h2>
+        <div ref={wedgeLeftRef} className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(160,165,162,1) 0%, rgba(235,237,236,0.9) 50%, rgba(235,237,236,0) 50%)', zIndex: 20, willChange: 'transform' }} />
+        <div ref={wedgeRightRef} className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(315deg, rgba(160,165,162,1) 0%, rgba(235,237,236,0.9) 50%, rgba(235,237,236,0) 50%)', zIndex: 20, willChange: 'transform' }} />
+        <div className="relative container mx-auto px-4">
+          <div ref={fairHeadingWrapperRef} className="fade-in-from-bottom">
+            <h2 ref={fairHeadingRef} className="text-2xl md:text-3xl font-extrabold mb-4 leading-tight drop-shadow-lg text-center" style={{ color: 'rgb(74, 162, 192)' }}>Fair Pricing And A Comprehensive Warranty On All Repairs</h2>
+          </div>
           
         </div>
       </section>
@@ -342,6 +361,7 @@ export default function Home() {
             {/* Background image fills card */}
             <div className="absolute inset-0">
               <div
+                ref={carBgRef}
                 className="absolute inset-0 bg-cover bg-center fade-in-from-bottom"
                 style={{ backgroundImage: "url('/Honda_Prelude_1978 copy.jpg')" }}
                 onClick={() => setSelectedImage('/Honda_Prelude_1978 copy.jpg')}

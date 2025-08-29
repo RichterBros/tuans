@@ -356,7 +356,7 @@ body {
 /* Homepage hero heading: slide in slightly from the right */
 @keyframes heroHeadingSlideInRight {
   from {
-    transform: translateX(32px) scale(1.06);
+    transform: translateX(32px) scale(1.35);
   }
   to {
     transform: translateX(0) scale(1);
@@ -364,7 +364,7 @@ body {
 }
 
 .hero-heading-slide-in-right {
-  animation: heroHeadingSlideInRight 0.8s ease-out forwards;
+  animation: heroHeadingSlideInRight 0.9s cubic-bezier(0.85, 0, 0.15, 1) forwards;
   will-change: transform;
   transform-origin: center;
 }
