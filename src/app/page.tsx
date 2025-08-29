@@ -101,7 +101,19 @@ export default function Home() {
         tryRevealAndSeparate()
       }
 
-      // Stop scroll-driven wedge/heading movement; reveal logic handled elsewhere
+      // Wedge parallax in Fair Pricing: vertical drift at 1:1 with scroll, keep horizontal gap after separation
+      const y = window.scrollY || 0
+      const slowY = Math.round(y * 1.0)
+      const GAP_PX = 1050
+      const HALF_GAP = Math.round(GAP_PX / 2)
+      const baseXLeft = separationDoneRef.current ? -HALF_GAP : 0
+      const baseXRight = separationDoneRef.current ? HALF_GAP : 0
+      if (wedgeLeftRef.current) {
+        wedgeLeftRef.current.style.transform = `translate(${baseXLeft}px, ${slowY}px)`
+      }
+      if (wedgeRightRef.current) {
+        wedgeRightRef.current.style.transform = `translate(${baseXRight}px, ${slowY}px)`
+      }
     }
     
     // Set initial position for mobile
@@ -184,12 +196,23 @@ export default function Home() {
     const rightEl = wedgeRightRef.current
     if (leftEl) {
       leftEl.style.transition = 'transform 900ms cubic-bezier(0.85, 0, 0.15, 1)'
-      leftEl.style.transform = `translate(${-HALF_GAP}px, 0)`
     }
     if (rightEl) {
       rightEl.style.transition = 'transform 900ms cubic-bezier(0.85, 0, 0.15, 1)'
-      rightEl.style.transform = `translate(${HALF_GAP}px, 0)`
     }
+
+    // After the initial open animation completes, remove transitions so scroll updates are 1:1 (no easing)
+    const onWedgeTransitionEnd = () => {
+      if (leftEl) leftEl.style.transition = 'none'
+      if (rightEl) rightEl.style.transition = 'none'
+      leftEl?.removeEventListener('transitionend', onWedgeTransitionEnd)
+      rightEl?.removeEventListener('transitionend', onWedgeTransitionEnd)
+    }
+    leftEl?.addEventListener('transitionend', onWedgeTransitionEnd)
+    rightEl?.addEventListener('transitionend', onWedgeTransitionEnd)
+
+    if (leftEl) leftEl.style.transform = `translate(${-HALF_GAP}px, 0)`
+    if (rightEl) rightEl.style.transform = `translate(${HALF_GAP}px, 0)`
     if (fairHeadingWrapperRef.current) fairHeadingWrapperRef.current.classList.add('visible')
     separationDoneRef.current = true
   }
@@ -246,7 +269,7 @@ export default function Home() {
         {/* Content */}
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full max-w-5xl px-6">
           <div className="flex-1 text-center md:text-left">
-            <h1 ref={heroHeadingRef} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight hero-heading-slide-in-right" style={{ backgroundImage: 'linear-gradient(to right, rgb(96, 178, 202) 0%, rgb(74, 162, 192) 100%)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', color: 'transparent' }}>
+            <h1 ref={heroHeadingRef} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 leading-tight hero-heading-slide-in-right" style={{ color: 'rgb(74, 162, 192)', textShadow: '0 2px 0 rgba(0, 0, 0, 0.75)' }}>
               Full Service Auto Repair and Maintenance
             </h1>
             <p className="text-lg md:text-xl mb-4 font-semibold drop-shadow-lg" style={{ color: 'rgb(74, 162, 192)' }}>
