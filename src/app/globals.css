@@ -74,6 +74,14 @@ body {
   }
 }
 
+/* Disable transitions until hydration to avoid SSR -> CSR snap */
+html:not(.hydrated) .fade-in-trigger,
+html:not(.hydrated) .fade-in-from-right,
+html:not(.hydrated) .fade-in-from-bottom,
+html:not(.hydrated) .fade-in-from-left {
+  transition: none !important;
+}
+
 .fade-in-trigger {
   opacity: 0;
   transform: translateY(-100px);
