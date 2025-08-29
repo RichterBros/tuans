@@ -11,8 +11,7 @@ export async function generateStaticParams(): Promise<Params[]> {
   return [{ page: '1' }]
 }
 
-export default async function BlogPagedPage(props: { params: Params } | Promise<{ params: Params }>) {
-  const { params } = await props
+export default async function BlogPagedPage({ params }: { params: Params }) {
   const pageNum = Number(params.page)
   const safePage = Number.isFinite(pageNum) && pageNum > 0 ? Math.floor(pageNum) : 1
 
