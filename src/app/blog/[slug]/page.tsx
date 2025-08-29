@@ -1,6 +1,6 @@
 import React from 'react'
 import { getAllBlogPosts, getBlogPostBySlug, isContentfulConfigured } from '@/lib/contentful'
-import type { RichTextDocument, RichTextNode } from '@/lib/contentful'
+import type { RichTextDocument, RichTextNode, RichTextMark } from '@/lib/contentful'
 
 export const revalidate = 60
 
@@ -10,7 +10,9 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
 }
 
 // Inline typing prevents Netlify type mismatch
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+export default async function BlogPostPage(
+  { params, searchParams }: { params: { slug: string }; searchParams: { [key: string]: string | string[] | undefined } }
+) {
   const { slug } = params
 
   if (!isContentfulConfigured()) {
@@ -105,8 +107,10 @@ function Node({ node }: { node: RichTextNode }) {
       )
     }
     case 'text': {
-      let el: React.ReactNode = node.value || ''
-      (node.marks || []).forEach((m) => {
+      const textValue: string = (node.value as string) ?? ''
+      let el: React.ReactNode = textValue
+      const marks: RichTextMark[] = Array.isArray(node.marks) ? (node.marks as RichTextMark[]) : []
+      marks.forEach((m: RichTextMark) => {
         if (m.type === 'bold') el = <strong>{el}</strong>
         if (m.type === 'italic') el = <em>{el}</em>
         if (m.type === 'underline') el = <u>{el}</u>
