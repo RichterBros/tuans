@@ -9,10 +9,14 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return posts.map((p) => ({ slug: p.slug }))
 }
 
-// Inline typing prevents Netlify type mismatch
-export default async function BlogPostPage(
-  { params, searchParams }: { params: { slug: string }; searchParams: { [key: string]: string | string[] | undefined } }
-) {
+// Inline typing fixes the Netlify/Next.js type mismatch
+export default async function BlogPostPage({
+  params,
+  searchParams,
+}: {
+  params: { slug: string }
+  searchParams?: { [key: string]: string | string[] | undefined }
+}) {
   const { slug } = params
 
   if (!isContentfulConfigured()) {
@@ -48,9 +52,7 @@ export default async function BlogPostPage(
         <header className="mb-8">
           <h1 className="text-3xl font-bold">{post.title}</h1>
           {post.publishedAt && (
-            <p className="opacity-60 text-sm mt-2">
-              {new Date(post.publishedAt).toLocaleDateString()}
-            </p>
+            <p className="opacity-60 text-sm mt-2">{new Date(post.publishedAt).toLocaleDateString()}</p>
           )}
         </header>
 
