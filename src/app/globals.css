@@ -82,6 +82,19 @@ html:not(.hydrated) .fade-in-from-left {
   transition: none !important;
 }
 
+/* Additionally, defer animations until full load to avoid route flicker */
+html:not(.ready) .fade-in-trigger,
+html:not(.ready) .fade-in-from-right,
+html:not(.ready) .fade-in-from-bottom,
+html:not(.ready) .fade-in-from-left {
+  transition: none !important;
+}
+
+/* Defer hero heading motion until page is fully ready */
+html:not(.ready) .hero-heading-slide-in-right {
+  animation: none !important;
+}
+
 .fade-in-trigger {
   opacity: 0;
   transform: translateY(-100px);
