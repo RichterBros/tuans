@@ -9,12 +9,8 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
   return posts.map((p) => ({ slug: p.slug }))
 }
 
-// Only include params; omit searchParams for stricter typing
-type PageProps = {
-  params: { slug: string }
-}
-
-export default async function BlogPostPage({ params }: PageProps) {
+// INLINE typing prevents Netlify type mismatch for async server components
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const { slug } = params
 
   if (!isContentfulConfigured()) {
