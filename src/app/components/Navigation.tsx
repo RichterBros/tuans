@@ -79,7 +79,7 @@ export default function Navigation() {
            </div>
 
                     {/* Center Logo and Text */}
-            <div className="relative z-10 flex flex-col items-center md:px-[50px]">
+            <div className="relative z-10 flex flex-col items-center md:px-12">
               <div className="flex flex-col items-center gap-2">
                 {/* Main logo */}
                 <div className="relative flex items-center justify-center">
