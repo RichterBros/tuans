@@ -240,7 +240,7 @@ export default function Home() {
           }}
         />
       </Head>
-      <main className="min-h-screen">
+      <main className="min-h-screen overflow-x-hidden">
       {/* Fixed background video layer behind the entire page */}
       <div ref={bgRef} className="fixed inset-0 w-full h-full pointer-events-none" style={{ zIndex: -2 }}>
         <video

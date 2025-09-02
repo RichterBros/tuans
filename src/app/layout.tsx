@@ -9,7 +9,7 @@ import WedgeStack from './components/WedgeStack'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Auto Repair Shop',
+  title: 'Tuans Auto Service',
   description: 'Professional automobile repair services',
 }
 
@@ -23,7 +23,7 @@ export default function RootLayout({
       <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
       </head>
-      <body className={inter.className + ' bg-black'}>
+      <body className={inter.className + ' bg-black overflow-x-hidden'}>
         <HydrationGuard />
         {/* AngleCut corner wedges */}
         {/* Original wedges disabled */}
@@ -36,7 +36,7 @@ export default function RootLayout({
         
         
         <Navigation />
-        <main className="site-content">{children}</main>
+        <main className="site-content overflow-x-hidden">{children}</main>
         
         {/* Footer Section */}
         <footer style={{ backgroundColor: 'rgb(30, 46, 67)', position: 'relative', zIndex: 2500 }}>

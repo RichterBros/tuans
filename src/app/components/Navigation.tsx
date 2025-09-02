@@ -49,11 +49,11 @@ export default function Navigation() {
   
 
   return (
-    <nav className="w-full bg-gradient-to-t from-red-900 via-red-900 to-black text-white py-4 px-2 flex flex-col items-center z-50" style={{ background: 'linear-gradient(to top, rgb(131, 136, 132) 0%, rgb(200, 205, 202) 35%, rgb(235, 237, 236) 100%)', position: 'relative', zIndex: 3000 }}>
+    <nav className="w-full bg-gradient-to-t from-red-900 via-red-900 to-black text-white py-4 px-2 flex flex-col items-center z-50 overflow-x-hidden" style={{ background: 'linear-gradient(to top, rgb(131, 136, 132) 0%, rgb(200, 205, 202) 35%, rgb(235, 237, 236) 100%)', position: 'relative', zIndex: 3000 }}>
       {/* Logo and Text Section */}
       <div className="relative flex items-center justify-center w-full max-w-6xl mx-auto gap-8 mb-4 md:mb-0 px-4 md:px-6">
                                                                        {/* Left Navigation Links - Hidden on mobile */}
-           <div className="relative z-10 hidden md:flex gap-6 lg:-translate-x-5">
+           <div className="relative z-10 hidden md:flex gap-6">
              {navLinks.slice(0, 3).map((link) => (
                <a
                  key={link.name}
@@ -79,7 +79,7 @@ export default function Navigation() {
            </div>
 
                     {/* Center Logo and Text */}
-            <div className="relative z-10 flex flex-col items-center">
+            <div className="relative z-10 flex flex-col items-center md:px-[50px]">
               <div className="flex flex-col items-center gap-2">
                 {/* Main logo */}
                 <div className="relative flex items-center justify-center">
@@ -95,7 +95,7 @@ export default function Navigation() {
             </div>
 
                                                                        {/* Right Navigation Links - Hidden on mobile */}
-           <div className="relative z-10 hidden md:flex gap-6 lg:translate-x-5">
+           <div className="relative z-10 hidden md:flex gap-6">
              {navLinks.slice(3).map((link) => (
                <a
                  key={link.name}

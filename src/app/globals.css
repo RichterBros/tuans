@@ -19,6 +19,11 @@
   }
 }
 
+/* Constrain media to container width by default */
+img, video {
+  max-width: 100%;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -27,6 +32,11 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+/* Prevent horizontal scrolling globally */
+html, body {
+  overflow-x: hidden;
 }
 
 /* Material Symbols setup */
@@ -93,6 +103,7 @@ html:not(.ready) .fade-in-from-left {
 /* Defer hero heading motion until page is fully ready */
 html:not(.ready) .hero-heading-slide-in-right {
   animation: none !important;
+  transform: translateX(32px) scale(1.35);
 }
 
 .fade-in-trigger {
@@ -164,17 +175,26 @@ html:not(.ready) .hero-heading-slide-in-right {
 .logo-container {
   position: relative;
   display: inline-block;
+  overflow: hidden;
 }
 
 .logo-img {
   display: block;
-  width: 592px;
+  max-width: 592px;
+  width: 100%;
+  height: auto;
 }
 
 /* Optional scale modifier for the logo container */
 .logo-scale-125 {
   transform: scale(1.25);
   transform-origin: center;
+}
+
+/* Mobile: keep logo within viewport and disable scale-up */
+@media (max-width: 767px) {
+  .logo-container { max-width: 90vw; }
+  .logo-scale-125 { transform: none; }
 }
 
 /* AngleCut corner wedges on viewport edges */
@@ -215,6 +235,8 @@ html:not(.ready) .hero-heading-slide-in-right {
 .wedge-layer {
   position: fixed;
   pointer-events: none;
+  max-width: 100vw;
+  overflow: hidden;
 }
 .wedge-bot { z-index: 3500; }
 .wedge-mid { z-index: 3501; }
