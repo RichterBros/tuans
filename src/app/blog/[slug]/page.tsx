@@ -1,5 +1,6 @@
 // src/app/blog/[slug]/page.tsx
 import React from 'react'
+import Image from 'next/image'
 import { getAllBlogPosts, getBlogPostBySlug, isContentfulConfigured } from '@/lib/contentful'
 import type { RichTextDocument, RichTextNode, RichTextMark } from '@/lib/contentful'
 
@@ -58,8 +59,8 @@ export default async function BlogPostPage({
         </header>
 
         {post.heroImageUrl && (
-          <div className="mb-8 overflow-hidden card-angled">
-            <img src={post.heroImageUrl} alt="" className="w-full max-h-[420px] object-cover" />
+          <div className="mb-8 overflow-hidden card-angled relative" style={{ height: 420 }}>
+            <Image src={post.heroImageUrl} alt="" fill sizes="100vw" className="object-cover" />
           </div>
         )}
 

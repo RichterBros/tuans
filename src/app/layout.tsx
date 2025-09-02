@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import React from 'react'
+import Image from 'next/image'
 import HydrationGuard from './components/HydrationGuard'
 import Navigation from './components/Navigation'
 import WedgeStack from './components/WedgeStack'
@@ -50,7 +51,7 @@ export default function RootLayout({
                     <div className="space-y-6">
                       {/* ASE Certified */}
                       <div className="flex items-center gap-4">
-                        <img src="/ase-certified.png" alt="ASE Certified" width="120" height="120" />
+                        <Image src="/ase-certified.png" alt="ASE Certified" width={120} height={120} />
                         <div style={{ color: 'rgb(74, 162, 192)' }}>
                           <p className="text-sm font-semibold">AUTOMOTIVE</p>
                           <p className="text-sm font-semibold">SERVICE EXCELLENCE</p>
@@ -59,7 +60,7 @@ export default function RootLayout({
                       
                       {/* A+ Rating and BBB Accredited */}
                       <div className="flex items-center gap-2">
-                        <img src="/BBB-rating-logo.png" alt="BBB Rating" width="300" height="300" />
+                        <Image src="/BBB-rating-logo.png" alt="BBB Rating" width={300} height={300} />
                       </div>
                     </div>
                   </div>
@@ -88,9 +89,10 @@ export default function RootLayout({
                             rel="noopener noreferrer"
                             className="block w-full h-48 rounded-lg overflow-hidden hover:opacity-90 transition-opacity"
                           >
-                            <img 
+                            <Image 
                               src="/map-placeholder.jpg" 
                               alt="Tuans Auto Service Location Map" 
+                              width={800} height={192}
                               className="w-full h-48 object-cover"
                             />
                           </a>

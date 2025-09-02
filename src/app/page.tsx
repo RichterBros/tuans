@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import Head from 'next/head'
 
 export default function Home() {
@@ -296,7 +297,7 @@ export default function Home() {
           {/* ASE Badge Placeholder */}
           <div className="flex-1 flex justify-center md:justify-end mt-8 md:mt-0">
             <div className="flex items-center justify-center">
-              <img src="/ase-certified.png" alt="ASE Certified" width="150" height="150" />
+              <Image src="/ase-certified.png" alt="ASE Certified" width={150} height={150} />
             </div>
           </div>
         </div>
@@ -322,12 +323,14 @@ export default function Home() {
             <div className="grid md:grid-cols-3 gap-8">
             {/* Left Section - Repair and Maintenance */}
             <div className="text-center">
-              <div className="mb-6 card-angled overflow-hidden fade-in-trigger">
+              <div className="mb-6 card-angled overflow-hidden fade-in-trigger relative h-48">
                 {/* Toyota Land Cruiser image */}
-                <img 
+                <Image 
                   src="/toyota-land-cruiser.png" 
                   alt="Toyota Land Cruiser - Repair and Maintenance" 
-                  className="block w-full h-48 object-cover cursor-pointer hover:opacity-50 transition-opacity glow-magenta"
+                  fill
+                  sizes="100vw"
+                  className="object-cover cursor-pointer hover:opacity-50 transition-opacity glow-magenta"
                   onClick={() => setSelectedImage("/toyota-land-cruiser.png")}
                 />
               </div>
@@ -339,12 +342,14 @@ export default function Home() {
 
             {/* Middle Section - Family Owned and Operated */}
             <div className="text-center">
-              <div className="mb-6 card-angled overflow-hidden fade-in-trigger delay-500">
+              <div className="mb-6 card-angled overflow-hidden fade-in-trigger delay-500 relative h-48">
                 {/* Team image */}
-                <img 
+                <Image 
                   src="/team-placeholder copy.png" 
                   alt="Tuans Auto Service Team" 
-                  className="block w-full h-48 object-cover cursor-pointer hover:opacity-50 transition-opacity glow-magenta"
+                  fill
+                  sizes="100vw"
+                  className="object-cover cursor-pointer hover:opacity-50 transition-opacity glow-magenta"
                   onClick={() => setSelectedImage("/team-placeholder copy.png")}
                 />
               </div>
@@ -356,12 +361,14 @@ export default function Home() {
 
             {/* Right Section - Business Hours */}
             <div className="text-center">
-              <div className="mb-6 card-angled overflow-hidden fade-in-trigger delay-1000">
+              <div className="mb-6 card-angled overflow-hidden fade-in-trigger delay-1000 relative h-48">
                 {/* Shop image */}
-                <img 
+                <Image 
                   src="/tuans-shop.png" 
                   alt="Tuans Auto Service Shop" 
-                  className="block w-full h-48 object-cover cursor-pointer hover:opacity-50  transition-opacity glow-magenta"
+                  fill
+                  sizes="100vw"
+                  className="object-cover cursor-pointer hover:opacity-50  transition-opacity glow-magenta"
                   onClick={() => setSelectedImage("/tuans-shop.png")}
                 />
               </div>

@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { getBlogPostsPage, isContentfulConfigured } from '@/lib/contentful'
 
@@ -37,7 +38,9 @@ export default async function BlogPagedPage({ params }: { params: Params }) {
             {posts.map((post) => (
               <li key={post.id} className="bg-[rgb(30,46,67)] overflow-hidden shadow card-angled">
                 {post.heroImageUrl ? (
-                  <img src={post.heroImageUrl} alt="" className="w-full h-40 object-cover" />
+                  <div className="relative w-full h-40">
+                    <Image src={post.heroImageUrl} alt="" fill sizes="33vw" className="object-cover" />
+                  </div>
                 ) : null}
                 <div className="p-4">
                   <h2 className="text-xl font-semibold mb-2">

@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect } from 'react'
+import Image from 'next/image'
 import Head from 'next/head';
 
 export default function About() {
@@ -171,22 +172,22 @@ export default function About() {
                 </div>
                 
                 {/* Shop Exterior Image - trigger */}
-                <div className="w-full h-[306px] card-angled overflow-hidden mb-0 fade-in-from-right mt-auto" id="image-trigger">
-                  <img src="/shop-exterior-red-car.jpg" alt="Shop Exterior with Red Sports Car" className="w-full h-full object-cover" style={{ objectPosition: 'center 60%' }} />
+                <div className="w-full h-[306px] card-angled overflow-hidden mb-0 fade-in-from-right mt-auto relative" id="image-trigger">
+                  <Image src="/shop-exterior-red-car.jpg" alt="Shop Exterior with Red Sports Car" fill sizes="100vw" className="object-cover" style={{ objectPosition: 'center 60%' }} />
                 </div>
                 
                 {/* Team Image - Shown on mobile, hidden on desktop */}
-                <div className="block lg:hidden w-full h-64 card-angled overflow-hidden fade-in-from-left" id="team-image-mobile">
-                  <img src="/team_straight_on_front.jpg" alt="Team Photo" className="w-full h-full object-cover" />
+                <div className="block lg:hidden w-full h-64 card-angled overflow-hidden fade-in-from-left relative" id="team-image-mobile">
+                  <Image src="/team_straight_on_front.jpg" alt="Team Photo" fill sizes="100vw" className="object-cover" />
                 </div>
               </div>
 
               {/* Bottom Row - Aligned Grey Boxes */}
-              <div className="hidden lg:block w-full h-64 card-angled overflow-hidden fade-in-from-left lg:col-start-1 lg:row-start-2 mb-0" id="team-image-desktop">
-                <img src="/team_straight_on_front.jpg" alt="Team Photo" className="w-full h-full object-cover" />
+              <div className="hidden lg:block w-full h-64 card-angled overflow-hidden fade-in-from-left lg:col-start-1 lg:row-start-2 mb-0 relative" id="team-image-desktop">
+                <Image src="/team_straight_on_front.jpg" alt="Team Photo" fill sizes="50vw" className="object-cover" />
               </div>
-              <div className="w-full h-64 card-angled overflow-hidden fade-in-from-right lg:col-start-2 lg:row-start-2 mb-0" id="garage-image">
-                <img src="/Garage_Interior.jpg" alt="Garage Interior" className="w-full h-full object-cover" />
+              <div className="w-full h-64 card-angled overflow-hidden fade-in-from-right lg:col-start-2 lg:row-start-2 mb-0 relative" id="garage-image">
+                <Image src="/Garage_Interior.jpg" alt="Garage Interior" fill sizes="50vw" className="object-cover" />
               </div>
             </div>
           </div>
