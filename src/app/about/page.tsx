@@ -98,13 +98,16 @@ export default function About() {
         {/* Hero Section */}
         <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden">
           {/* Background Image */}
-          <div
-            className="absolute inset-0 w-full h-full bg-cover bg-no-repeat hero-tilt-x-onload"
-            style={{
-              backgroundImage: "url('/engine-hero.jpg')",
-              backgroundPosition: 'center center',
-            }}
-          />
+          <div className="absolute inset-0 w-full h-full hero-tilt-x-onload">
+            <Image
+              src="/engine-hero.jpg"
+              alt="Engine background"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-black bg-opacity-70" />
           {/* Content */}
