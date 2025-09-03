@@ -48,7 +48,7 @@ export default function ContactPage() {
     }
   };
 
-  // Load reCAPTCHA script
+  // Load reCAPTCHA script and mark ready only after grecaptcha.ready
   useEffect(() => {
     if (!isRecaptchaEnabled) {
       setRecaptchaLoaded(false);
@@ -58,13 +58,41 @@ export default function ContactPage() {
     script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_SITE_KEY}`;
     script.async = true;
     script.defer = true;
-    script.onload = () => setRecaptchaLoaded(true);
+    script.onload = () => {
+      try {
+        if (window.grecaptcha && typeof window.grecaptcha.ready === 'function') {
+          window.grecaptcha.ready(() => setRecaptchaLoaded(true));
+        } else {
+          // Fallback: mark as loaded; execute() will still be wrapped in ready()
+          setRecaptchaLoaded(true);
+        }
+      } catch {
+        setRecaptchaLoaded(false);
+      }
+    };
+    script.onerror = () => {
+      setRecaptchaLoaded(false);
+    };
     document.head.appendChild(script);
 
     return () => {
       document.head.removeChild(script);
     };
   }, [RECAPTCHA_SITE_KEY, isRecaptchaEnabled]);
+
+  const getRecaptchaToken = (): Promise<string | null> => {
+    return new Promise((resolve) => {
+      if (!isRecaptchaEnabled) return resolve(null);
+      if (!window.grecaptcha || typeof window.grecaptcha.ready !== 'function') return resolve(null);
+      const siteKey = String(RECAPTCHA_SITE_KEY);
+      window.grecaptcha.ready(() => {
+        window.grecaptcha
+          .execute(siteKey, { action: 'contact_form' })
+          .then((t) => resolve(t))
+          .catch(() => resolve(null));
+      });
+    });
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -80,8 +108,14 @@ export default function ContactPage() {
 
     try {
       let token: string | null = null;
-      if (isRecaptchaEnabled && window.grecaptcha) {
-        token = await window.grecaptcha.execute(String(RECAPTCHA_SITE_KEY), { action: 'contact_form' });
+      if (isRecaptchaEnabled) {
+        if (!recaptchaLoaded) {
+          throw new Error('reCAPTCHA is not ready. Please try again in a moment.');
+        }
+        token = await getRecaptchaToken();
+        if (!token) {
+          throw new Error('reCAPTCHA could not be verified. Please reload the page or temporarily disable ad blockers.');
+        }
       }
 
       const response = await fetch('/api/contact', {
@@ -92,14 +126,17 @@ export default function ContactPage() {
 
       if (!response.ok) {
         const data = await response.json().catch(() => ({} as any));
-        throw new Error(data?.error || 'Failed to send message');
+        const base = data?.error || 'Failed to send message';
+        const details = data?.details ? `\nDetails: ${JSON.stringify(data.details)}` : '';
+        throw new Error(base + (process.env.NODE_ENV !== 'production' ? details : ''));
       }
 
       alert('Thank you for your message! We will get back to you soon.');
       setFormData({ name: '', phone: '', email: '', message: '' });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Form submission error:', error);
-      alert('There was an error submitting your form. Please try again.');
+      const message = typeof error?.message === 'string' ? error.message : 'There was an error submitting your form. Please try again.';
+      alert(message);
     } finally {
       setIsSubmitting(false);
     }

@@ -8,26 +8,59 @@ type ContactFormPayload = {
   token?: string | null
 }
 
-async function verifyRecaptcha(token: string | null | undefined): Promise<boolean> {
+type RecaptchaVerifyResponse = {
+  success: boolean
+  score?: number
+  action?: string
+  challenge_ts?: string
+  hostname?: string
+  'error-codes'?: string[]
+}
+
+type RecaptchaResult = {
+  ok: boolean
+  errors?: string[]
+  score?: number
+  action?: string
+  hostname?: string
+}
+
+async function verifyRecaptcha(token: string | null | undefined, remoteIp?: string | null): Promise<RecaptchaResult> {
   const secret = process.env.RECAPTCHA_SECRET_KEY
   if (!secret) {
     // reCAPTCHA not configured; allow for local testing
-    return true
+    return { ok: true }
   }
-  if (!token) return false
+  if (!token) return { ok: false, errors: ['missing-input-response'] }
   try {
     const params = new URLSearchParams()
     params.append('secret', secret)
     params.append('response', token)
+    if (remoteIp) params.append('remoteip', remoteIp)
     const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: params.toString(),
     })
-    const data = (await response.json()) as { success: boolean }
-    return !!data.success
-  } catch {
-    return false
+    const data = (await response.json()) as RecaptchaVerifyResponse
+    if (!data.success) {
+      console.error('[reCAPTCHA] Verification failed', {
+        errors: data['error-codes'],
+        action: data.action,
+        score: data.score,
+        hostname: data.hostname,
+      })
+    }
+    return {
+      ok: !!data.success,
+      errors: data['error-codes'],
+      score: data.score,
+      action: data.action,
+      hostname: data.hostname,
+    }
+  } catch (err) {
+    console.error('[reCAPTCHA] Verification error', err)
+    return { ok: false, errors: ['verification-exception'] }
   }
 }
 
@@ -40,9 +73,20 @@ export async function POST(request: Request): Promise<Response> {
       return new Response(JSON.stringify({ error: 'Missing required fields' }), { status: 400 })
     }
 
-    const recaptchaOk = await verifyRecaptcha(token)
-    if (!recaptchaOk) {
-      return new Response(JSON.stringify({ error: 'reCAPTCHA verification failed' }), { status: 400 })
+    const forwardedFor = request.headers.get('x-forwarded-for')
+    const clientIp = forwardedFor ? forwardedFor.split(',')[0]?.trim() : null
+    const hostHeader = request.headers.get('host') || ''
+    const isLocalhost = hostHeader.includes('localhost') || hostHeader.startsWith('127.0.0.1')
+    const disableViaEnv = process.env.DISABLE_RECAPTCHA === 'true'
+    const bypassRecaptcha = disableViaEnv || (process.env.NODE_ENV !== 'production' && isLocalhost)
+
+    const recaptcha = bypassRecaptcha ? { ok: true } : await verifyRecaptcha(token, clientIp)
+    if (!recaptcha.ok) {
+      const includeDetails = process.env.DEBUG_RECAPTCHA === 'true' || process.env.NODE_ENV !== 'production'
+      const body = includeDetails
+        ? { error: 'reCAPTCHA verification failed', details: { errors: recaptcha.errors, action: recaptcha.action, score: recaptcha.score, hostname: recaptcha.hostname } }
+        : { error: 'reCAPTCHA verification failed' }
+      return new Response(JSON.stringify(body), { status: 400 })
     }
 
     const host = process.env.SMTP_HOST
