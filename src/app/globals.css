@@ -134,8 +134,8 @@ html:not(.ready) .hero-heading-slide-in-right {
 
 .fade-in-from-right {
   opacity: 0;
-  transform: translateX(100px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transform: translateX(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .fade-in-from-right.visible {
@@ -157,8 +157,8 @@ html:not(.ready) .hero-heading-slide-in-right {
 
 .fade-in-from-left {
   opacity: 0;
-  transform: translateX(-100px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .fade-in-from-left.visible {
@@ -386,6 +386,7 @@ html:not(.ready) .hero-heading-slide-in-right {
 
 .hero-text-scale-up {
   opacity: 0;
+  transform: scale(0.95);
   transform-origin: center;
   will-change: transform;
 }

@@ -83,9 +83,20 @@ export default function Navigation() {
             <div className="relative z-10 flex flex-col items-center md:px-12">
               <div className="flex flex-col items-center gap-2">
                 {/* Main logo */}
-                <div className="relative flex items-center justify-center">
-                  <a href="/" className="logo-container z-10 logo-scale-125 relative block" ref={logoContainerRef}>
-                    <Image src="/tuan-logo-textv2 copy.png" alt="Tuans Auto Service" width={425} height={112} priority className="object-contain" />
+                <div className="relative flex items-center justify-center w-[425px] h-[112px]">
+                  <a
+                    href="/"
+                    className="logo-container z-10 logo-scale-125 relative block w-full h-full"
+                    ref={logoContainerRef}
+                  >
+                    <Image
+                      src="/tuan-logo-textv2 copy.png"
+                      alt="Tuans Auto Service"
+                      width={425}
+                      height={112}
+                      priority
+                      className="object-contain w-full h-full"
+                    />
                     <div className="masked-overlay">
                       <div className="sheen" ref={sheenRef}></div>
                     </div>

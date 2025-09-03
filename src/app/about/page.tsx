@@ -98,7 +98,7 @@ export default function About() {
         {/* Hero Section */}
         <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden">
           {/* Background Image */}
-          <div className="absolute inset-0 w-full h-full hero-tilt-x-onload">
+          <div className="absolute inset-0 -z-10 hero-tilt-x-onload">
             <Image
               src="/engine-hero.jpg"
               alt="Engine background"
@@ -124,7 +124,7 @@ export default function About() {
         {/* Main Content Section */}
         <section className="pt-16 pb-[100px] bg-white">
           <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 lg:grid-rows-2 gap-12 max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 lg:grid-rows-2 gap-x-12 gap-y-0 max-w-6xl mx-auto">
               {/* Left Column - About Us (Top Row) */}
               <div className="space-y-6 lg:col-start-1 lg:row-start-1 h-full lg:min-h-[520px] flex flex-col">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">
