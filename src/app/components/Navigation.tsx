@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import logo from '/public/tuan-logo-textv2 copy.png';
 
 type NavLink = { name: string; href: string; external?: boolean };
 
@@ -98,10 +99,10 @@ export default function Navigation() {
                 ref={logoContainerRef}
               >
                 <Image
-                  src="/tuan-logo-textv2 copy.png"
+                  src={logo} 
                   alt="Tuans Auto Service"
                   fill
-                  priority
+                  priority={true}
                   className="object-contain"
                   sizes="425px"
                 />
