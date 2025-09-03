@@ -96,9 +96,9 @@ export default function About() {
       </Head>
       <main className="bg-gray-100 overflow-x-hidden">
         {/* Hero Section */}
-        <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden bg-black">
           {/* Background Image */}
-          <div className="absolute inset-0 z-0 hero-tilt-x-onload">
+          <div className="absolute inset-0 z-0 about-hero-zoom-in">
             <Image
               src="/engine-hero.jpg"
               alt="Engine background"

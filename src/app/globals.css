@@ -455,6 +455,19 @@ html:not(.ready) .hero-heading-slide-in-right {
   animation: heroTiltXOnLoad 1.4s ease-out forwards;
 }
 
+/* About page hero: zoom to current size (no rotation) */
+@keyframes heroZoomToOne {
+  from { transform: scale(1.06); }
+  to { transform: scale(1); }
+}
+
+.about-hero-zoom-in {
+  transform: scale(1.06);
+  transform-origin: center;
+  will-change: transform;
+  animation: heroZoomToOne 0.9s ease-out forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-tilt-x-onload {
     animation: none;
