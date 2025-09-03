@@ -119,9 +119,9 @@ export default function About() {
         </section>
 
         {/* Main Content Section */}
-        <section className="pt-16 pb-[100px] bg-white">
+        <section className="pt-16 pb-[50px] bg-white">
           <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 lg:grid-rows-2 gap-x-12 gap-y-0 max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 lg:grid-rows-[auto_auto_auto] gap-x-12 gap-y-8 lg:gap-y-[50px] max-w-6xl mx-auto">
               {/* Left Column - About Us (Top Row) */}
               <div className="space-y-6 lg:col-start-1 lg:row-start-1 h-full lg:min-h-[520px] flex flex-col">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6">
@@ -189,6 +189,8 @@ export default function About() {
               <div className="w-full h-64 card-angled overflow-hidden fade-in-from-right lg:col-start-2 lg:row-start-2 mb-0 relative" id="garage-image">
                 <Image src="/Garage_Interior.jpg" alt="Garage Interior" fill sizes="50vw" className="object-cover" />
               </div>
+              {/* Spacer Row to force 50px gap before footer on large screens */}
+              <div className="hidden lg:block lg:col-span-2 lg:row-start-3 h-[25px]" aria-hidden />
             </div>
           </div>
         </section>
