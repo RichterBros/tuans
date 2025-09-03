@@ -98,16 +98,13 @@ export default function About() {
         {/* Hero Section */}
         <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden bg-black">
           {/* Background Image */}
-          <div className="absolute inset-0 z-0 about-hero-zoom-in">
-            <Image
-              src="/engine-hero.jpg"
-              alt="Engine background"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
+          <div
+            className="absolute inset-0 w-full h-full bg-cover bg-no-repeat about-hero-zoom-in"
+            style={{
+              backgroundImage: "url('/engine-hero.jpg')",
+              backgroundPosition: 'center center',
+            }}
+          />
           {/* Dark Overlay */}
           <div className="absolute inset-0 z-10 bg-black bg-opacity-70" />
           {/* Content */}

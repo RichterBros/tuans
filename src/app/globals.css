@@ -385,21 +385,15 @@ html:not(.ready) .hero-heading-slide-in-right {
 }
 
 .hero-text-scale-up {
-  opacity: 0;
+  opacity: 1;
   transform: scale(0.95);
   transform-origin: center;
   will-change: transform;
-}
-.ready .hero-text-scale-up {
   animation: heroTextScaleUp 0.9s ease-out forwards;
-  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ready .hero-text-scale-up {
-    animation: none;
-    opacity: 1;
-  }
+  .hero-text-scale-up { animation: none; opacity: 1; }
 }
 
 /* Homepage hero heading: slide in slightly from the right */
