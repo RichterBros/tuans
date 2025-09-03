@@ -447,10 +447,11 @@ html:not(.ready) .hero-heading-slide-in-right {
 
 .hero-tilt-x-onload {
   animation: none;
+  transform: rotate(0.5deg);
   transform-origin: center;
   will-change: transform;
 }
-.ready .hero-tilt-x-onload {
+.hydrated .hero-tilt-x-onload {
   animation: heroTiltXOnLoad 1.4s ease-out forwards;
 }
 

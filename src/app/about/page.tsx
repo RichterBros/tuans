@@ -98,7 +98,7 @@ export default function About() {
         {/* Hero Section */}
         <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden">
           {/* Background Image */}
-          <div className="absolute inset-0 -z-10 hero-tilt-x-onload">
+          <div className="absolute inset-0 z-0 hero-tilt-x-onload">
             <Image
               src="/engine-hero.jpg"
               alt="Engine background"
@@ -109,9 +109,9 @@ export default function About() {
             />
           </div>
           {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black bg-opacity-70" />
+          <div className="absolute inset-0 z-10 bg-black bg-opacity-70" />
           {/* Content */}
-          <div className="relative z-10 text-center text-white hero-text-scale-up">
+          <div className="relative z-20 text-center text-white hero-text-scale-up">
             <h1 className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight drop-shadow-lg">
               ABOUT TUANS AUTO SERVICE
             </h1>
