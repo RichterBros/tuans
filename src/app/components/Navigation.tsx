@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from 'react'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 type NavLink = { name: string; href: string; external?: boolean }
@@ -83,8 +84,8 @@ export default function Navigation() {
               <div className="flex flex-col items-center gap-2">
                 {/* Main logo */}
                 <div className="relative flex items-center justify-center">
-                  <a href="/" className="logo-container z-10 logo-scale-125" ref={logoContainerRef}>
-                    <img src="/tuan-logo-textv2 copy.png" alt="Tuans Auto Service" className="logo-img" />
+                  <a href="/" className="logo-container z-10 logo-scale-125 relative block" ref={logoContainerRef}>
+                    <Image src="/tuan-logo-textv2 copy.png" alt="Tuans Auto Service" width={425} height={112} priority className="object-contain" />
                     <div className="masked-overlay">
                       <div className="sheen" ref={sheenRef}></div>
                     </div>

@@ -119,7 +119,7 @@ export default function About() {
         </section>
 
         {/* Main Content Section */}
-        <section className="pt-16 pb-16 lg:pb-[200px] bg-white">
+        <section className="pt-16 pb-[100px] bg-white">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 lg:grid-rows-2 gap-12 max-w-6xl mx-auto">
               {/* Left Column - About Us (Top Row) */}
