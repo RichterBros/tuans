@@ -29,7 +29,7 @@ export default function ContactPage() {
     "@type": "AutoRepair",
     "name": "Tuans Auto Service",
     "description": "Contact Tuans Auto Service for all your automotive repair needs in Portland, OR. ASE certified mechanics, honest pricing, same-day service.",
-    "url": "https://tuansautoservice.com/contact",
+    "url": "https://tuansauto.com/contact",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "1405 NE Killingsworth St",
@@ -152,9 +152,9 @@ export default function ContactPage() {
         <meta property="og:title" content="Contact Tuans Auto Service Portland" />
         <meta property="og:description" content="Contact Tuans Auto Service in Portland, OR. ASE certified mechanics, honest pricing, same-day service." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://tuansautoservice.com/contact" />
+        <meta property="og:url" content="https://tuansauto.com/contact" />
         <meta property="og:image" content="/logo.png" />
-        <link rel="canonical" href="https://tuansautoservice.com/contact" />
+        <link rel="canonical" href="https://tuansauto.com/contact" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
