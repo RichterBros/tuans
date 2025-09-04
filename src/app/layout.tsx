@@ -10,7 +10,7 @@ import WedgeStack from './components/WedgeStack'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Tuans Auto Service',
+  title: 'RZGarageLLC',
   description: 'Professional automobile repair services',
 }
 

@@ -13,9 +13,9 @@ type WedgeStackProps = {
 
 export default function WedgeStack({
   enableParallax = true,
-  topColor = "#ffdf32",
-  midColor = "#ffb700",
-  botColor = "#ff9f0a",
+  topColor = "#ffffff",
+  midColor = "#e5e7eb",
+  botColor = "#9ca3af",
   topSize = 240,
   gap = 120,
   position = 'tl',
@@ -63,7 +63,7 @@ export default function WedgeStack({
           width: `${botSize}px`,
           height: `${botSize}px`,
           clipPath,
-          background: `linear-gradient(to top, ${botColor} 0%, rgba(255,159,10,0.1) 100%)`,
+          background: `linear-gradient(to top, ${botColor} 0%, rgba(255,255,255,0.1) 100%)`,
         }}
       />
       {/* Middle band */}
@@ -75,7 +75,7 @@ export default function WedgeStack({
           width: `${midSize}px`,
           height: `${midSize}px`,
           clipPath,
-          background: `linear-gradient(to top, ${midColor} 0%, rgba(255,183,0,0.1) 100%)`,
+          background: `linear-gradient(to top, ${midColor} 0%, rgba(255,255,255,0.1) 100%)`,
         }}
       />
       {/* Top band */}
@@ -87,7 +87,7 @@ export default function WedgeStack({
           width: `${topSize}px`,
           height: `${topSize}px`,
           clipPath,
-          background: `linear-gradient(to top, ${topColor} 0%, rgba(255,223,50,0.1) 100%)`,
+          background: `linear-gradient(to top, ${topColor} 0%, rgba(255,255,255,0.1) 100%)`,
         }}
       />
     </>
