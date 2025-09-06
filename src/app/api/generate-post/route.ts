@@ -136,6 +136,8 @@ async function uploadImageToContentful({
   buffer: Buffer
   contentType: string
 }): Promise<string> {
+  // Convert Node Buffer to a Fetch-compatible body (Uint8Array)
+  const bodyBytes = new Uint8Array(buffer)
   const uploadRes = await fetch(
     `https://upload.contentful.com/spaces/${SPACE_ID}/uploads`,
     {
@@ -144,7 +146,7 @@ async function uploadImageToContentful({
         Authorization: `Bearer ${CMA_TOKEN}`,
         'Content-Type': 'application/octet-stream',
       },
-      body: buffer,
+      body: bodyBytes,
     }
   )
   if (!uploadRes.ok) {
