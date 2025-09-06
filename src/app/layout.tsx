@@ -123,7 +123,7 @@ export default function RootLayout({
                    <a href="/about" className="hover:text-gray-400">ABOUT</a>
                    <a href="/reviews" className="hover:text-gray-400">REVIEWS</a>
                    <a href="/contact" className="hover:text-gray-400">CONTACT</a>
-                   <a href="/blog" className="hover:text-gray-400">BLOG</a>
+                   <a href="/blog/page/1" className="hover:text-gray-400">BLOG</a>
                  </div>
               </div>
             </div>

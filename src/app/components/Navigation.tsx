@@ -12,7 +12,7 @@ const navLinks: NavLink[] = [
   { name: "ABOUT", href: "/about" },
   { name: "REVIEWS", href: "/reviews" },
   { name: "CONTACT", href: "/contact" },
-  { name: "BLOG", href: "/blog" },
+  { name: "BLOG", href: "/blog/page/1" },
 ];
 
 export default function Navigation() {
