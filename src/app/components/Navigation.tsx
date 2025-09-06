@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import logo from '/public/rz-logo-textv2.png';
+import logo from '/public/tuan-logo-textv2 copy.png';
 
 type NavLink = { name: string; href: string; external?: boolean };
 
@@ -47,25 +47,25 @@ export default function Navigation() {
 
   return (
     <nav
-      className="w-full bg-gradient-to-t from-red-900 via-red-900 to-black text-white py-4 px-2 flex flex-col items-center z-50 overflow-x-hidden"
+      className="w-full bg-gradient-to-t from-gray-700 via-gray-500 to-gray-200 text-white py-4 px-2 flex flex-col items-center z-50 overflow-x-hidden"
       style={{
         background:
-          "linear-gradient(to top, rgb(0, 0, 0) 0%, rgb(127, 29, 29) 100%)",
+          "linear-gradient(to top, rgb(55, 65, 81) 0%, rgb(229, 231, 235) 100%)",
         position: "relative",
         zIndex: 3000,
       }}
     >
       {/* Logo and Text Section */}
-      <div className="relative flex items-center justify-center w-full max-w-6xl mx-auto gap-[55px] mb-4 md:mb-0 px-4 md:px-6">
+      <div className="relative flex items-center justify-between w-full max-w-6xl mx-auto gap-[55px] mb-4 md:mb-0 px-4 md:px-6">
         {/* Left Navigation Links - Hidden on mobile */}
-        <div className="relative z-10 hidden md:flex gap-6">
+        <div className="relative z-10 hidden md:flex gap-6 flex-1 justify-end">
           {navLinks.slice(0, 3).map((link) => (
             <a
               key={link.name}
               href={link.href}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noopener noreferrer" : undefined}
-              className="uppercase font-bold tracking-widest text-[1.3125rem] text-white hover:text-gray-400 transition-colors"
+              className="uppercase font-bold tracking-widest text-[1.3125rem] text-white hover:text-[#ffdf32] transition-colors"
             >
               {link.name}
             </a>
@@ -73,22 +73,21 @@ export default function Navigation() {
         </div>
 
         {/* Center Logo and Text */}
-        <div className="relative z-10 flex flex-col items-center md:px-0">
+        <div className="relative z-10 flex flex-col items-center md:px-0 flex-shrink-0">
           <div className="flex flex-col items-center gap-2">
             {/* Main logo */}
-            <div className="relative flex items-center justify-center w-[150px] h-[150px]">
+            <div className="relative flex items-center justify-center w-[360px] md:w-[520px]">
               <a
                 href="/"
-                className="logo-container z-10 logo-scale-100 relative block w-full h-full"
+                className="logo-container z-10 relative block w-full"
                 ref={logoContainerRef}
               >
                 <Image
                   src={logo} 
                   alt="Tuans Auto Service"
-                  fill
                   priority={true}
-                  
-                  sizes="200px"
+                  className="w-full h-auto"
+                  sizes="(min-width: 768px) 260px, 180px"
                 />
                 <div className="masked-overlay absolute inset-0">
                   <div className="sheen" ref={sheenRef}></div>
@@ -99,14 +98,14 @@ export default function Navigation() {
         </div>
 
         {/* Right Navigation Links - Hidden on mobile */}
-        <div className="relative z-10 hidden md:flex gap-6">
+        <div className="relative z-10 hidden md:flex gap-6 flex-1 justify-start">
           {navLinks.slice(3).map((link) => (
             <a
               key={link.name}
               href={link.href}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noopener noreferrer" : undefined}
-              className="uppercase font-bold tracking-widest text-[1.3125rem] text-white hover:text-gray-400 transition-colors"
+              className="uppercase font-bold tracking-widest text-[1.3125rem] text-white hover:text-[#ffdf32] transition-colors"
             >
               {link.name}
             </a>
@@ -122,7 +121,7 @@ export default function Navigation() {
             href={link.href}
             target={link.external ? "_blank" : undefined}
             rel={link.external ? "noopener noreferrer" : undefined}
-            className="uppercase font-bold tracking-widest text-sm text-white hover:text-gray-400 transition-colors"
+            className="uppercase font-bold tracking-widest text-sm text-white hover:text-[#ffdf32] transition-colors"
           >
             {link.name}
           </a>

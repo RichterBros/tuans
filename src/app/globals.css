@@ -194,10 +194,17 @@ html:not(.ready) .hero-heading-slide-in-right {
   transform-origin: center;
 }
 
+/* Double-size modifier for the logo container */
+.logo-scale-200 {
+  transform: scale(2);
+  transform-origin: center;
+}
+
 /* Mobile: keep logo within viewport and disable scale-up */
 @media (max-width: 767px) {
   .logo-container { max-width: 90vw; }
   .logo-scale-125 { transform: none; }
+  .logo-scale-200 { transform: none; }
 }
 
 /* AngleCut corner wedges on viewport edges */
@@ -303,11 +310,11 @@ html:not(.ready) .hero-heading-slide-in-right {
   pointer-events: none;
   z-index: 2;
 
-  mask-image: url('/rz-logo-textv2.png');
+  mask-image: url('/tuan-logo-textv2 copy.png');
   mask-size: contain;
   mask-repeat: no-repeat;
   mask-position: center;
-  -webkit-mask-image: url('/rz-logo-textv2.png');
+  -webkit-mask-image: url('/tuan-logo-textv2 copy.png');
   -webkit-mask-size: contain;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
