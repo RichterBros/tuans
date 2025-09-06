@@ -87,7 +87,8 @@ export default function Navigation() {
                   alt="Tuans Auto Service"
                   priority={true}
                   className="w-full h-auto"
-                  sizes="(min-width: 768px) 260px, 180px"
+                  quality={100}
+                  sizes="(min-width: 768px) 520px, 360px"
                 />
                 <div className="masked-overlay absolute inset-0">
                   <div className="sheen" ref={sheenRef}></div>
