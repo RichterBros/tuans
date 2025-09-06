@@ -207,6 +207,24 @@ html:not(.ready) .hero-heading-slide-in-right {
   .logo-scale-200 { transform: none; }
 }
 
+/* Stack nav links under logo at 1500px and below */
+@media (max-width: 1500px) {
+  .nav-layout {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .nav-links-desktop {
+    display: none !important;
+  }
+  /* Reuse existing mobile links block for this breakpoint */
+  .nav-links-below-1500 {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+}
+
 /* AngleCut corner wedges on viewport edges */
 .anglecut-wedge {
   position: fixed;

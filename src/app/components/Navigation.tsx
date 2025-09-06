@@ -56,9 +56,9 @@ export default function Navigation() {
       }}
     >
       {/* Logo and Text Section */}
-      <div className="relative flex items-center justify-between w-full max-w-6xl mx-auto gap-[55px] mb-4 md:mb-0 px-4 md:px-6">
+      <div className="relative flex items-center justify-between w-full max-w-6xl mx-auto gap-[55px] mb-4 md:mb-0 px-4 md:px-6 nav-layout">
         {/* Left Navigation Links - Hidden on mobile */}
-        <div className="relative z-10 hidden md:flex gap-6 flex-1 justify-end">
+        <div className="relative z-10 hidden md:flex gap-6 flex-1 justify-end nav-links-desktop">
           {navLinks.slice(0, 3).map((link) => (
             <a
               key={link.name}
@@ -98,7 +98,7 @@ export default function Navigation() {
         </div>
 
         {/* Right Navigation Links - Hidden on mobile */}
-        <div className="relative z-10 hidden md:flex gap-6 flex-1 justify-start">
+        <div className="relative z-10 hidden md:flex gap-6 flex-1 justify-start nav-links-desktop">
           {navLinks.slice(3).map((link) => (
             <a
               key={link.name}
@@ -114,7 +114,7 @@ export default function Navigation() {
       </div>
 
       {/* Mobile Navigation Links */}
-      <div className="flex flex-wrap gap-4 md:hidden justify-center">
+      <div className="flex flex-wrap gap-4 md:hidden justify-center nav-links-below-1500">
         {navLinks.map((link) => (
           <a
             key={link.name}
